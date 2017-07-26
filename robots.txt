@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /login
+Disallow: /register
+Disallow: /insructor-login
+Disallow: /disclaimer
+Disallow: /privacy-policy
+Disallow: /term-of-use
+Disallow: /janbask

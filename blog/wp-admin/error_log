@@ -1,0 +1,4 @@
+[31-Mar-2017 11:00:37 UTC] WordPress database error Unknown column 'jbb_' in 'field list' for query SELECT jbb_
+[03-Apr-2017 13:27:04 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW) in /home/janbaskdemo/public_html/jbclassblog/wp-content/themes/jbclassblog/functions.php on line 333
+[03-Apr-2017 13:27:08 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW) in /home/janbaskdemo/public_html/jbclassblog/wp-content/themes/jbclassblog/functions.php on line 333
+[03-Apr-2017 13:27:12 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW) in /home/janbaskdemo/public_html/jbclassblog/wp-content/themes/jbclassblog/functions.php on line 333
