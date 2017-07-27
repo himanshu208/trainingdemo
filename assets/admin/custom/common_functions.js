@@ -3,6 +3,7 @@ function getRootUrl(url) {
 	return url.toString().replace(/^(.*\/\/[^\/?#]*).*$/,"$1")+"/";
 }
 var site_url = getRootUrl(document.location);
+var site_url = "http://localhost/trainingdemo/";
 
 /*	Check Email Syntax	*/
 function IsEmail(email) {

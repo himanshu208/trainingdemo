@@ -70,10 +70,18 @@ class Admin_Controller extends Front_Controller
 		Start Functions related to enrolled users page on Admin
 	************************************/
 	public function enrolled_users()
-	{
+	{ //print_r($_POST);
+	if(!empty($_POST['status'])){
+		if($_POST['status']=="Active"){
+			$this->AM->updateStatus(array("email_verified"=>'1'),$_POST['id']);
+		}else{
+			$this->AM->updateStatus(array("email_verified"=>'0'),$_POST['id']);
+		}
+	}
 		$this->checkAdminLoginSession();
 		$data['page'] = '123';
 		$data['enrolled_user_arr']=$this->AM->enrolleduserList();
+		
 		$this->load->view($this->_admin_enrolled_users,$data);
 	}
 	/**********************************

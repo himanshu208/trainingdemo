@@ -114,6 +114,20 @@ class Admin_Model extends CI_Model
 		}
 		return $enrolled_users;
 	}	
+	function updateStatus($data,$id)
+	{
+		$this->db->where('user_id',$id);
+		if($this->db->update('jb_user',$data))
+		{
+			//echo $this->db->last_query();
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+		
+	}
 	/********************************
 		End Methods used on Admin Enrolled Student Page
 	*********************************/	
