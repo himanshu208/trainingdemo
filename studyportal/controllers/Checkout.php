@@ -33,6 +33,12 @@ class Checkout extends Front_Controller
 			// if($this->session->userdata("user_id"))
 			// {
 				$user_id = $this->session->userdata("user_id");
+				if($user_id == "") {
+					$user_id = $this->input->post('user_id');
+					$admin_user = $this->input->post('admin_user');
+					$this->session->set_userdata(array("user_id"=>$user_id,"admin_user"=>$admin_user));
+				}
+				
 				$batch_id = $this->input->post('batch_id');
 				$course_id = $this->input->post('course_id');
 				$cart_data = array('user_id'=>$user_id,'batch_id'=>$batch_id,'course_id'=>$course_id);
@@ -63,23 +69,46 @@ class Checkout extends Front_Controller
 			$currency = 'USD';
 			$order_date = date("Y-m-d");
 			$checkOrder=$this->PM->checkUserOrder($user_id);
+			
+				/*Check if user is enrolled from admin*/
+			$enrolled_by_admin = "";
+			if($this->session->userdata("admin_user")){
+				$enrolled_by_admin = $this->session->userdata("admin_user");
+			}
+				
 			if($checkOrder)
 			{
+				
 				$orderData=$this->PM->checkUserOrderExistsId($user_id);
-				$orderId=$orderData[0]->id;
-				$order_data = array("user_id"=>$user_id,"cart_id"=>$cart_id,"amount_paid"=>$amount_paid,"currency"=>$currency,"order_date"=>$order_date,"is_order_complete"=>"0","payment_status"=>'1');
+				$orderId = $orderData[0]->id;
+				$order_data = array("user_id"=>$user_id,"cart_id"=>$cart_id,"amount_paid"=>$amount_paid,"currency"=>$currency,"order_date"=>$order_date,"is_order_complete"=>"0","payment_status"=>'1',"enrolled_by_admin"=>$enrolled_by_admin);
 				$response = $this->PM->updateOrder($order_data,$orderId);
 				$response = array('order_created'=>'1');
 			}
 			else
 			{
-				$order_data = array("user_id"=>$user_id,"cart_id"=>$cart_id,"amount_paid"=>$amount_paid,"currency"=>$currency,"order_date"=>$order_date,"is_order_complete"=>"0","payment_status"=>'1');
+				$order_data = array("user_id"=>$user_id,"cart_id"=>$cart_id,"amount_paid"=>$amount_paid,"currency"=>$currency,"order_date"=>$order_date,"is_order_complete"=>"0","payment_status"=>'1',"enrolled_by_admin"=>$enrolled_by_admin);
 				$response = $this->PM->createOrder($order_data);
-				
 			}
-
+			
+			$this->session->unset_userdata('admin_user');
+				/*Enroll Admin user directly to course without payment*/
+			if($user_id=="170") {
+				$admin_order_data = $this->PM->getOrderData($user_id);
+				$order_id = $admin_order_data[0]->id;
+				$cart_id = $admin_order_data[0]->cart_id;
+				$this->PM->updateOrderStatus($order_id,$cart_id);
+				$cart_items = $this->PM->fetchCartData($cart_id);
+				foreach($cart_items as $cart_item) {
+					$enrolled_batch_data = array('course_id'=>$cart_item->course_id,'batch_id'=>$cart_item->batch_id,'user_id'=>$user_id);
+					$this->PM->insertUserEnrolledBatch($enrolled_batch_data);
+				} 
+				$this->load->view($this->_payment_status);
+			}
+			
 			echo json_encode($response);
 			die();
+			
 		}
 		else
 		{
