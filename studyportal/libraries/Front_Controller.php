@@ -101,6 +101,10 @@ class Front_Controller extends My_Controller
 		$this->_admin_dashboard = $this->config->item("admin_template") . "dashboard.php";
 		$this->_admin_users = $this->config->item("admin_template") . "users.php";
 		$this->_admin_enrolled_users = $this->config->item("admin_template") . "enrolled-users.php";
+		
+		$this->_admin_add_new_user = $this->config->item("admin_template") . "add-new-user.php";
+		$this->_admin_enroll_user_course = $this->config->item("admin_template") . "enroll-user-course.php";
+		
 		$this->_admin_courses = $this->config->item("admin_template") . "courses.php";
 		$this->_admin_add_new_course = $this->config->item("admin_template") . "add-new-course.php";
 		$this->_admin_edit_course = $this->config->item("admin_template") . "edit_course.php";
