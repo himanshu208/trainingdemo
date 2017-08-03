@@ -150,6 +150,10 @@ $route['myadmin/dashboard'] = "Admin_Controller/dashboard";
 $route['myadmin/users'] = "Admin_Controller/users";
 $route['myadmin/updatepassword'] = "Admin_Controller/updatepassword";
 $route['myadmin/enrolled-users'] = "Admin_Controller/enrolled_users";
+
+$route['myadmin/add-new-user'] = "Admin_Controller/add_new_user";
+$route['myadmin/enroll-user-course'] = "Admin_Controller/enroll_user_course";
+
 $route['myadmin/courses'] = "Admin_Controller/courses";
 $route['myadmin/add-new-course'] = "Admin_Controller/add_new_course";
 $route['myadmin/edit-course/:num'] = "Admin_Controller/edit_course";
