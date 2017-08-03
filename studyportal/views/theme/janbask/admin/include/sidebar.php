@@ -9,6 +9,10 @@
 	<ul>	
     <li > <a href="<?php	echo site_url('myadmin/users');	?>"><i class="icon icon-user"></i> <span>Registered Student</span></a> </li>
     <li > <a href="<?php	echo site_url('myadmin/enrolled-users');	?>"><i class="icon icon-user"></i> <span>Enrolled Student</span></a> </li>
+	
+	<li > <a href="<?php	echo site_url('myadmin/add-new-user');	?>"><i class="icon icon-user"></i> <span>Add New User</span></a> </li>
+	
+	<li > <a href="<?php	echo site_url('myadmin/enroll-user-course');	?>"><i class="icon icon-user"></i> <span>Enroll Student to Course</span></a> </li>
 	</ul>
 	</li>
 	<li class="submenu admin_menu"> <a href="#"><i class="icon icon-user"></i> <span>Course Management</span></a>	
