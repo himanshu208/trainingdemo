@@ -93,7 +93,7 @@ class Checkout extends Front_Controller
 			
 			$this->session->unset_userdata('admin_user');
 				/*Enroll Admin user directly to course without payment*/
-			if($user_id=="170") {
+			if($user_id=="3") {
 				$admin_order_data = $this->PM->getOrderData($user_id);
 				$order_id = $admin_order_data[0]->id;
 				$cart_id = $admin_order_data[0]->cart_id;
