@@ -1068,3 +1068,70 @@ $("#admin_update_password").on("submit",function(event){
 		}
 	});
 });
+
+
+/*Start Enrolling user to a batch from admin*/
+$("#admin_user_enrollment").off();
+$("#admin_user_enrollment").on("submit",function(event) {
+	event.preventDefault();
+	
+	$("#select_user_error").html("");
+	$("#select_course_error").html("");
+	$("#select_batch_error").html("");
+	$("#select_adminuser_error").html("");
+	
+	var user_id = $("#user_selected").val();
+	if(user_id=="0" || user_id=="") {
+		$("#select_user_error").html("User Name Can't be empty");
+		$("#user_selected").focus();
+		return false;
+	}
+	
+	var course_id = $("#class_course_selected").val();
+	if(course_id=="0" || course_id=="") {
+		$("#select_course_error").html("Course Can't be empty");
+		$("#class_course_selected").focus();
+		return false;
+	}
+	
+	var batch_id = $("#class_batch_selected").val();
+	if(batch_id=="0" || batch_id=="") {
+		$("#select_batch_error").html("Batch Can't be empty");
+		$("#class_batch_selected").focus();
+		return false;
+	}
+	
+	var admin_user = $("#student_enrolled_by").val();
+	if(admin_user=="0" || admin_user=="") {
+		$("#select_adminuser_error").html("Admin User Can't be empty");
+		$("#student_enrolled_by").focus();
+		return false;
+	}
+	
+/*	var batch_amount = $("#batch_amount").val();
+	if(batch_amount=="0" || batch_amount=="") {
+		$("#select_batch_amount_error").html("Amount Can't be empty");
+		$("#batch_amount").focus();
+		return false;
+	}	*/
+	
+	var batch_info = {"batch_id":batch_id,"course_id":course_id,"user_id":user_id,"admin_user":admin_user};
+	$.ajax({
+		url:site_url+'Checkout/enrollUser',
+		data:batch_info,
+		type:'POST',
+		success:function(response)
+		{
+			response = JSON.parse(response);
+			if(response.loged_in_user=='1')
+			{
+				window.location.href = site_url+response.redirect;
+			}
+		},
+		error:function()
+		{
+			alert('Error Occured,Contact Admin');
+		}
+	});
+});
+/*End Enrolling user to a batch from admin*/
