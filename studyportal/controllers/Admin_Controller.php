@@ -70,22 +70,43 @@ class Admin_Controller extends Front_Controller
 		Start Functions related to enrolled users page on Admin
 	************************************/
 	public function enrolled_users()
-	{ //print_r($_POST);
-	if(!empty($_POST['status'])){
-		if($_POST['status']=="Active"){
-			$this->AM->updateStatus(array("email_verified"=>'1'),$_POST['id']);
-		}else{
-			$this->AM->updateStatus(array("email_verified"=>'0'),$_POST['id']);
-		}
-	}
+	{
 		$this->checkAdminLoginSession();
 		$data['page'] = '123';
 		$data['enrolled_user_arr']=$this->AM->enrolleduserList();
-		
 		$this->load->view($this->_admin_enrolled_users,$data);
 	}
 	/**********************************
 		End Functions related to enrolled users page on Admin
+	************************************/
+	
+	/**********************************
+		Start Functions related to enroll user to a course on Admin
+	************************************/
+	public function add_new_user()
+	{
+		$this->checkAdminLoginSession();
+		$data["courses"] = $this->HM->fetchCourseList();
+		$this->load->view($this->_admin_add_new_user,$data);
+	}
+	/**********************************
+		End Functions related to enroll user to a course on Admin
+	************************************/
+
+	
+	/**********************************
+		Start Functions related to enroll user to a course on Admin
+	************************************/
+	public function enroll_user_course()
+	{
+		$this->checkAdminLoginSession();
+		$data['page'] = '123';
+		$data['user_arr'] = $this->AM->userList();
+		$data['course_arr'] = $this->AM->courseList();
+		$this->load->view($this->_admin_enroll_user_course,$data);
+	}
+	/**********************************
+		End Functions related to enroll user to a course on Admin
 	************************************/
 	
 	
