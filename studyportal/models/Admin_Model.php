@@ -102,6 +102,8 @@ class Admin_Model extends CI_Model
 		$this->db->join("states as at","at.state_id=au.state",'left');
 		
 		$this->db->join("cities as act",'act.city_id=au.city','left');
+		$this->db->where("ao.is_order_complete","1");
+		$this->db->where("ao.payment_status","2");
 		$this->db->order_by('au.user_id desc');
 		$query = $this->db->get();
 		if($query->num_rows()>0)
