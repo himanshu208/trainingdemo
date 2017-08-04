@@ -361,10 +361,14 @@ $("#payment_form").on("submit",function(event){
 		contentType: false,
 		success:function(response)
 		{
-			response=JSON.parse(response);
+			// response=JSON.parse(response);
+			console.log(typeof(response));
+			console.log(response);
+			response = JSON.parse(response);
 			if(response.order_created=="1")
 			{
-				window.location.href = site_url+"payment"
+				console.log(site_url+response.redirect);
+				window.location.href = site_url+response.redirect;
 			}
 			
 		},
