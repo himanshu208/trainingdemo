@@ -76,6 +76,7 @@ class Checkout extends Front_Controller
 				$enrolled_by_admin = $this->session->userdata("admin_user");
 			}
 				
+			
 			if($checkOrder)
 			{
 				
@@ -83,12 +84,13 @@ class Checkout extends Front_Controller
 				$orderId = $orderData[0]->id;
 				$order_data = array("user_id"=>$user_id,"cart_id"=>$cart_id,"amount_paid"=>$amount_paid,"currency"=>$currency,"order_date"=>$order_date,"is_order_complete"=>"0","payment_status"=>'1',"enrolled_by_admin"=>$enrolled_by_admin);
 				$response = $this->PM->updateOrder($order_data,$orderId);
-				$response = array('order_created'=>'1');
+				$response = array('order_created'=>'1',"redirect"=>"payment");
 			}
 			else
 			{
 				$order_data = array("user_id"=>$user_id,"cart_id"=>$cart_id,"amount_paid"=>$amount_paid,"currency"=>$currency,"order_date"=>$order_date,"is_order_complete"=>"0","payment_status"=>'1',"enrolled_by_admin"=>$enrolled_by_admin);
 				$response = $this->PM->createOrder($order_data);
+				$response["redirect"] = "payment";
 			}
 			
 			$this->session->unset_userdata('admin_user');
@@ -103,7 +105,7 @@ class Checkout extends Front_Controller
 					$enrolled_batch_data = array('course_id'=>$cart_item->course_id,'batch_id'=>$cart_item->batch_id,'user_id'=>$user_id);
 					$this->PM->insertUserEnrolledBatch($enrolled_batch_data);
 				} 
-				$this->load->view($this->_payment_status);
+				$response = array('order_created'=>'1',"redirect"=>"payment-status");
 			}
 			
 			echo json_encode($response);
