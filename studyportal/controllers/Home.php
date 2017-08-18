@@ -130,7 +130,8 @@ public function submit_popup_form1()
 			$email=$this->input->post("email");
 			//$course=$this->input->post("course");
 			//$location=$this->input->post("location");
-			$data_arr=array("name"=>$name,"email"=>$email,"mobile"=>$mobile,'page_name'=>"Popup Form 1 Enquiry","create_date"=>date("Y-m-d"));
+			$referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
+			$data_arr=array("name"=>$name,"email"=>$email,"mobile"=>$mobile,'page_name'=>"Popup Form 1 Enquiry","create_date"=>date("Y-m-d"),"referer"=>$referer );
 			//$this->HM->storeContactInquirt($data_arr);
 			///////////////////////////////////////
 			$this->_contact_enquiry = $this->config->item("email_template") . "popup_enquiry.php";
@@ -140,7 +141,8 @@ public function submit_popup_form1()
 			$config['wordwrap'] = TRUE;
 			$config['mailtype'] = 'html';
 			$this->email->initialize($config);
-			$this->email->from("noreply@janbasktraining.com","Janbask Training");
+			//$this->email->from("noreply@janbasktraining.com","Janbask Training");
+			$this->email->from($email,$name);
 			$this->email->to("himanshu.208@gmail.com");
 			$this->email->to("tarun.arora@janbask.com,training@janbask.com, rohit.batra@janbask.com, jiten.miglani@janbask.com");
 			/* $this->email->bcc('navin.3434@gmail.com');  */

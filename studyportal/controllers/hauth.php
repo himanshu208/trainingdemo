@@ -1,101 +1,84 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-class HAuth extends CI_Controller {
+/**
+ * Hauth Controller Class
+ */
+class Hauth extends Front_Controller {
 
-	public function index()
-	{
-		$this->load->view('hauth/home');
-	}
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct()
+  {
+    parent::__construct();
 
-	public function login($provider)
-	{
-		log_message('debug', "controllers.HAuth.login($provider) called");
+    $this->load->helper('url');
+    $this->load->library('Hybridauth');
+  }
 
-		try
-		{
-			log_message('debug', 'controllers.HAuth.login: loading HybridAuthLib');
-			$this->load->library('HybridAuthLib');
+  /**
+   * {@inheritdoc}
+   */
+  public function index()
+  {
+    // Build a list of enabled providers.
+    $providers = array();
+    foreach ($this->hybridauth->HA->getProviders() as $provider_id => $params)
+    {
+      $providers[] = anchor("hauth/window/{$provider_id}", $provider_id);
+    }
 
-			if ($this->hybridauthlib->providerEnabled($provider))
-			{
-				log_message('debug', "controllers.HAuth.login: service $provider enabled, trying to authenticate.");
-				$service = $this->hybridauthlib->authenticate($provider);
+    $this->load->view('hauth/login_widget', array(
+      'providers' => $providers,
+    ));
+  }
 
-				if ($service->isUserConnected())
+  /**
+   * Try to authenticate the user with a given provider
+   *
+   * @param string $provider_id Define provider to login
+   */
+  public function window($provider_id)
+  {
+    $params = array(
+      'hauth_return_to' => site_url("hauth/window/{$provider_id}"),
+    );
+    if (isset($_REQUEST['openid_identifier']))
+    {
+      $params['openid_identifier'] = $_REQUEST['openid_identifier'];
+    }
+    try
+    {
+      $adapter = $this->hybridauth->HA->authenticate($provider_id, $params);
+      $profile = $adapter->getUserProfile();
+//print_r($profile);
+$social_email = $profile->email;
+				$social_name = $profile->firstName." ".$profile->lastName;
+				$user_info = array("name"=>$social_name,"email"=>$social_email,"email_verified"=>"1","date_created"=>date("Y-m-d"),"is_social"=>"1","social_platform"=>$provider_id);
+				$response = $this->HM->checkExistingUser($user_info);
+				if(!empty($response))
 				{
-					log_message('debug', 'controller.HAuth.login: user authenticated.');
-
-					$user_profile = $service->getUserProfile();
-
-					log_message('info', 'controllers.HAuth.login: user profile:'.PHP_EOL.print_r($user_profile, TRUE));
-
-					$data['user_profile'] = $user_profile;
-
-					$this->load->view('hauth/done',$data);
+					$user_id = $response[0]->user_id;
+					$this->session->set_userdata(array("user_id"=>$user_id,"user_name"=>$social_name));
+					 redirect(site_url('/courses'), "location");
 				}
-				else // Cannot authenticate user
-				{
-					show_error('Cannot authenticate user');
-				}
-			}
-			else // This service is not enabled.
-			{
-				log_message('error', 'controllers.HAuth.login: This provider is not enabled ('.$provider.')');
-				show_404($_SERVER['REQUEST_URI']);
-			}
-		}
-		catch(Exception $e)
-		{
-			$error = 'Unexpected error';
-			switch($e->getCode())
-			{
-				case 0 : $error = 'Unspecified error.'; break;
-				case 1 : $error = 'Hybriauth configuration error.'; break;
-				case 2 : $error = 'Provider not properly configured.'; break;
-				case 3 : $error = 'Unknown or disabled provider.'; break;
-				case 4 : $error = 'Missing provider application credentials.'; break;
-				case 5 : log_message('debug', 'controllers.HAuth.login: Authentification failed. The user has canceled the authentication or the provider refused the connection.');
-				         //redirect();
-				         if (isset($service))
-				         {
-				         	log_message('debug', 'controllers.HAuth.login: logging out from service.');
-				         	$service->logout();
-				         }
-				         show_error('User has cancelled the authentication or the provider refused the connection.');
-				         break;
-				case 6 : $error = 'User profile request failed. Most likely the user is not connected to the provider and he should to authenticate again.';
-				         break;
-				case 7 : $error = 'User not connected to the provider.';
-				         break;
-			}
+      $this->load->view('hauth/done', array(
+        'profile' => $profile,
+      ));
+    }
+    catch (Exception $e)
+    {
+      show_error($e->getMessage());
+    }
+  }
 
-			if (isset($service))
-			{
-				$service->logout();
-			}
+  /**
+   * Handle the OpenID and OAuth endpoint
+   */
+  public function endpoint()
+  {
+    $this->hybridauth->process();
+  }
 
-			log_message('error', 'controllers.HAuth.login: '.$error);
-			show_error('Error authenticating user.');
-		}
-	}
-
-	public function endpoint()
-	{
-
-		log_message('debug', 'controllers.HAuth.endpoint called.');
-		log_message('info', 'controllers.HAuth.endpoint: $_REQUEST: '.print_r($_REQUEST, TRUE));
-
-		if ($_SERVER['REQUEST_METHOD'] === 'GET')
-		{
-			log_message('debug', 'controllers.HAuth.endpoint: the request method is GET, copying REQUEST array into GET array.');
-			$_GET = $_REQUEST;
-		}
-
-		log_message('debug', 'controllers.HAuth.endpoint: loading the original HybridAuth endpoint script.');
-		require_once APPPATH.'/third_party/hybridauth/index.php';
-
-	}
 }
-
-/* End of file hauth.php */
-/* Location: ./application/controllers/hauth.php */

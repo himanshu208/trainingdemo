@@ -19,7 +19,7 @@
          <div class="col-sm-3 col-sm-12 col-lg-3 col-xs-12" ><h6 align="left">Quick Links</h6><br><ul class="ul_left_arrow3">
             <li><a href="<?php	echo site_url("insructor-login");	?>"><strong>Become an Instructor</strong></a></li>
             <li><a href="<?php	echo site_url("login");	?>"><strong>Become a Learner</strong></a></li>
-            <li><a href="http://www.janbasktraining.com/blog/" target="_blank"><strong>Blogs</strong></a></li>
+            <li><a href="http://www.janbasktraining.com/blog/" target="_blank"><strong>Blog</strong></a></li>
             <li><a href="<?php	echo site_url("corporate-training");	?>"><strong>Corporate Training</strong></a></li>
             <li><a href="<?php	echo site_url("courses");	?>"><strong>Browse Courses</strong></a></li>
             
@@ -277,7 +277,7 @@ width: 100%;
 background: #000;
 display: none;
 }
-#logindiv, #logindiv2{
+#logindiv, #logindiv2, #logindiv21{
 
 position: fixed; z-index:9999 !important;
 top: 0px;
@@ -454,7 +454,7 @@ $("#logindiv2").css("display", "none");
 </form>
 
 </div>
-<div id="logindiv2"  class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
+<div id="logindiv21"  class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
 <form class="form" action="#" id="login2" style=" position: relative; background-color:#EEA508 !important;">
 <p  align="center" style="font-size:35px; padding-top:10px; color:#fff !important;">No Problem!</p>
 <p class="headpop" align="center" style="font-size:20px; padding-top:10px; color:#fff !important;"> Instead I would prefer to receive Free News Letters?

@@ -84,13 +84,13 @@
 									<div align="center" class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 										<div class="inner no-margin">
                                         <img style="" src="<?php echo site_url('assets/img/about-girl.png');?>">
-											<!--<h1 class="inside-banner" style="color:#666;">Sign in With</h1>
+											<!--h1 class="inside-banner" style="color:#666;">Sign in With</h1>
 											<div class="content"> 
 												<p style="">You can Login with your social media accounts</p> <br>
-												<a onclick="" style="cursor:pointer;" href="<?php //echo $authUrl;	?>" id="login_fb"><img style="width:150px;" src="<?php	//echo site_url('assets/img/new/login_with_facebook.png');	?>"></a><br><br>
-												<a href="" class="" id=""><img style="width:150px;" src="<?php	//echo site_url('assets/img/new/Red-signin_Long_base_44dp.png');	?>"></a><br><br>
+												<a onclick="" style="cursor:pointer;" href="<?php echo site_url('/hauth/window/Facebook');?>" id="login_fb"><img style="width:150px;" src="<?php	echo site_url('assets/img/new/login_with_facebook.png');	?>"></a><br><br>
+												<!--a href="" class="" id=""><img style="width:150px;" src="<?php	//echo site_url('assets/img/new/Red-signin_Long_base_44dp.png');	?>"></a><br><br>
 												<a href="" class="" id=""><img style="width:150px;" src="<?php	//echo site_url('assets/img/new/linked.png');	?>"></a>
-											</div>-->
+											</div-->
 										</div>
 									</div>
 								</div>
