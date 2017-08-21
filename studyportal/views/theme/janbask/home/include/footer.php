@@ -355,7 +355,7 @@ $("#logindiv").css("display", "none");
 $("#logindiv2").css("display", "block");
 });
 $("#cancel2").click(function() {
-$("#logindiv2").css("display", "none");
+$("#logindiv21").css("display", "none");
 });
 $("#onclick").click(function() {
 $("#contactdiv").css("display", "block");
@@ -406,11 +406,11 @@ $("#logindiv").css("display", "none");
 });
 
 $("#loginbtn2").click(function() {
-//var name = $("#name").val();
-var email = $("#email2").val();
-//var mobile = $("#mobile").val();
-if (email == "" ){
-alert("please enter a valid email.");
+var name = $("#name").val();
+var email = $("#email").val();
+var mobile = $("#mobile").val();
+if (name == "" || email == "" || mobile == ""){
+alert("All Fields are required.");
 }else{
 	$.post( "https://www.janbasktraining.com/submit_popup_form1",$( "#login2" ).serialize(), function( data ) {
 //alert(data);
@@ -454,6 +454,8 @@ $("#logindiv2").css("display", "none");
 </form>
 
 </div>
+
+<?php } ?>
 <div id="logindiv21"  class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
 <form class="form" action="#" id="login2" style=" position: relative; background-color:#EEA508 !important;">
 <p  align="center" style="font-size:35px; padding-top:10px; color:#fff !important;">No Problem!</p>
@@ -462,6 +464,13 @@ $("#logindiv2").css("display", "none");
 
 <br/>
 <input type="hidden" id="formname" name="formname" value="2"/>
+<div class="col-md-6 col-lg-6 col-sm-12 col-xs-12" style="padding:5px 5px !important;">
+<input type="text" id="name" name="name" placeholder="Name"/>
+</div>
+<div class="col-md-6 col-lg-6 col-sm-12 col-xs-12" style="padding:5px 5px !important;">
+<input type="text" id="mobile" name="mobile" placeholder=" Phone No."/>
+
+</div>
 <input type="text" id="email2" name="email" placeholder="Email to Get Discount"/><br/>
 <input onClick="ga('send', 'event', { eventCategory: 'layoverfreedemo', eventAction: 'submit', eventLabel: 'lead', eventValue: 5});" type="button" id="loginbtn2" value="Submit" style=" display: block;
     position: absolute;
@@ -484,4 +493,3 @@ $("#logindiv2").css("display", "none");
 </form>
 
 </div>
-<?php } ?>

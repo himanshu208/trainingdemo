@@ -58,7 +58,14 @@ class Admin_Controller extends Front_Controller
 	{
 		$this->checkAdminLoginSession();
 		$data['page'] = '123';
-		$data['user_arr']=$this->AM->userList();		
+		//print_r($_POST);	
+		if(!empty($_POST['status'])){
+			$id = $_POST['id'];
+			$status = ($_POST['status']=="Active")?"1":"0";
+			$data = array("email_verified"=>$status);
+			$this->AM->updateStatus($data,$id);
+		}
+		$data['user_arr']=$this->AM->userList();	
 		$this->load->view($this->_admin_users,$data);
 	}
 	/**********************************

@@ -50,6 +50,8 @@
                   <th>Address</th>
                   <th>Email Varified</th>
                   <th>Register Date</th>
+				  <th>Register Via</th>
+				   <th>Email Verify</th>
                 </tr>
               </thead>
               <tbody>
@@ -71,13 +73,23 @@
 								  <td><?php echo $user->address;?></td>
 								  <td><?php echo ($user->email_verified=="1"?"Yes":"No");?></td>
 								  <td><?php echo date("M,d,Y", strtotime($user->date_created));?></td>
+								  <td><?php echo ($user->is_social=="1"?$user->social_platform:"Email");?></td>
+								    <td >
+								  <form action="" method="post">
+								  <input type="hidden" name="id" value="<?php echo $user->user_id;?>">
+								  <select style="width:100px;" name="status" onchange="changeStatus(this)">
+									<option <?php echo ($user->email_verified==1)?"selected":"";?> value="Active">Yes</option>
+									<option <?php echo ($user->email_verified==0)?"selected":"";?> value="Inactive">No</option>
+								  </select>
+								  </form>
+								  </td>
 								</tr>
 				<?php 		}	 
 						}
 						else
 						{ 
 				?>
-							<tr><td colspan="9">No Record Found </td></tr>
+							<tr><td colspan="14">No Record Found </td></tr>
 				<?php } ?>
                 
                 
@@ -101,5 +113,12 @@
 <script src="<?php	echo site_url('assets/admin/js/jquery.dataTables.min.js');	?>"></script> 
 <script src="<?php	echo site_url('assets/admin/js/matrix.js');	?>"></script> 
 <script src="<?php	echo site_url('assets/admin/js/matrix.tables.js');	?>"></script>
+<script>
+function changeStatus(obj){
+	if(confirm("Are you sure you want change?")){
+	obj.form.submit();
+	}
+}
+</script>
 </body>
 </html>
