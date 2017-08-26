@@ -48,7 +48,7 @@
                   <th>Enrolled Date</th>
                   <th>Country</th>
                   <th>State</th>
-				  <th>Email Verified</th>
+				 
                 </tr>
               </thead>
               <tbody>
@@ -68,15 +68,7 @@
 								  <td><?php echo $enrolled_user->enrolled_date;?></td>
 								  <td><?php echo $enrolled_user->country_name;?></td>
 								  <td><?php echo $enrolled_user->state_name;?></td>
-								  <td>
-								  <form action="" method="post">
-								  <input type="hidden" name="id" value="<?php echo $enrolled_user->user_id;?>">
-								  <select name="status" onchange="changeStatus(this)">
-									<option <?php echo ($enrolled_user->email_verified==1)?"selected":"";?> value="Active">Yes</option>
-									<option <?php echo ($enrolled_user->email_verified==0)?"selected":"";?> value="Inactive">No</option>
-								  </select>
-								  </form>
-								  </td>
+								
 								</tr>
 				<?php 		}	 
 						}

@@ -494,6 +494,10 @@ src="https://www.facebook.com/tr?id=1863665380325677&ev=PageView&noscript=1"
     <span class="glyphicon glyphicon-chevron-right"></span>
     <span class="sr-only">Next</span>
   </a>--> 
+  <a href="javascript:;" onclick="  $('#logindiv21').css('display', 'block');">
+  An exclusive  promo coupon is available on this course for next [ TIMER ] minutes. + CLAIM NOW
+  </a>
+
               </div>
             </div>
           </div>
