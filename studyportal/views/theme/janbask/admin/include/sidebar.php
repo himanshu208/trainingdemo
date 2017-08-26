@@ -48,7 +48,7 @@
      
 	 </ul>
 	 </li>
-    <li class="submenu admin_menu"> <a href="#"><i class="icon icon-email"></i> <span>Newsletter Management</span></a>
+    <li class="submenu admin_menu"> <a href="#"><i class="icon icon-envelope"></i> <span>Newsletter Management</span></a>
      <ul>
         <li><a href="<?php	echo site_url('myadmin/subscriber');	?>">Subscriber</a></li>
         <li><a href="<?php	echo site_url('myadmin/emailtemplate');	?>">Email Template</a></li>
@@ -56,13 +56,22 @@
       </ul>
 
     </li>	
-    <li class="submenu admin_menu"> <a href="#"><i class="icon icon-email"></i> <span>Report Management</span></a>
+    <li class="submenu admin_menu"> <a href="#"><i class="icon icon-envelope"></i> <span>Report Management</span></a>
      <ul>
         <li><a href="<?php	echo site_url('myadmin/subscriber');	?>">Subscriber</a></li>
    
       </ul>
 
     </li>	
+	
+	<li class="submenu admin_menu"> <a href="#"><i class="icon icon-envelope"></i> <span>Rating Management</span></a>
+     <ul>
+        <li><a href="<?php	echo site_url('myadmin/ratings');	?>">Ratings</a></li>
+		<li><a href="<?php	echo site_url('myadmin/new-rating-requests');	?>">New Rating Requests</a></li>
+      </ul>
+
+    </li>	
+	
   </ul>
 </div>
 <!--sidebar-menu--> 

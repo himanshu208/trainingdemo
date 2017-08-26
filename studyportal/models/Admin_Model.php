@@ -820,7 +820,74 @@ class Admin_Model extends CI_Model
 	{
 		$this->db->where($table_id_name,$table_id);
 		$this->db->delete($table_name);
-	}		
+	}	
+
+	/**********************************
+		Start Functions to fetch admin approved ratings
+	************************************/	
+	function userRatings() {
+		$this->db->select("rt.*,ac.name as course_name");
+		$this->db->from("rating as rt");
+		$this->db->join('courses as ac','ac.course_id=rt.course_id','left');
+		$this->db->where("rt.status","1");
+		$query = $this->db->get();
+		if($query->num_rows()>0) {
+			$result = $query->result();
+		} else {
+			$result = array();
+		}
+		return $result;		
+	}
+		/*Function to insert new rating record*/
+	function inesertNewRating($rating_data) {
+		if($this->db->insert('rating',$rating_data)) {
+			$status = 1;
+		} else {
+			$status = 0;
+		}
+		return $status;
+	}
+		/**Function to get single rating details**/
+	function getSingleRatingData($rating_id) {
+		$where_cond = array('id'=>$rating_id);
+		$this->db->select("*");
+		$this->db->from('rating');
+		$this->db->where($where_cond);
+		$query = $this->db->get();
+		if($query->num_rows()>0) {
+			$rating_data = $query->result();
+		} else {
+			$rating_data = array();
+		}
+		return $rating_data;
+	}	
+		/**Method to update rating data**/
+	function editRating($rating_data,$rating_id) {
+		$this->db->where('id',$rating_id);
+		if($this->db->update('rating',$rating_data)) {
+			$status = 1;
+		} else {
+			$status = 0;
+		}
+		return $status;
+	}
+		/**Function to fetch new rating requests**/
+	function newRatingRequest() {
+		$this->db->select("rt.*,ac.name as course_name");
+		$this->db->from("rating as rt");
+		$this->db->join('courses as ac','ac.course_id=rt.course_id','left');
+		$this->db->where("rt.status","0");
+		$query = $this->db->get();
+		if($query->num_rows()>0) {
+			$result = $query->result();
+		} else {
+			$result = array();
+		}
+		return $result;		
+	}
+	/**********************************
+		End Functions to fetch admin approved ratings
+	************************************/
 }
 	
 ?>
