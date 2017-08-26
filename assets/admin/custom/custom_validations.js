@@ -995,8 +995,6 @@ $(".delete_record").on("click",function(event){
 			success:function(response)
 			{
 				window.location.reload();
-				
-				
 			},
 			error:function()
 			{
@@ -1135,3 +1133,143 @@ $("#admin_user_enrollment").on("submit",function(event) {
 	});
 });
 /*End Enrolling user to a batch from admin*/
+
+
+	/********************************
+			Validation for Admin Rating Form
+	*********************************/
+$("#add_new_rating_form").off();
+$("#add_new_rating_form").on("submit",function(event) {
+	event.preventDefault();
+	
+	$("#ratingUserNameError").html("");
+	$("#ratingCourseError").html("");
+	$("#ratingCommentsError").html("");
+	$("#ratingStarError").html("");
+	
+	var user_name = $("#ratingUserName").val();
+	if(user_name=="") {
+		$("#ratingUserNameError").html("Enter Name");
+		$("#ratingUserName").focus();
+		return false;
+	}
+	
+	var course_id = $("#ratingCourse").val();
+	if(course_id=="0" || course_id=="") {
+		$("#ratingCourseError").html("Select Course");
+		$("#ratingCourse").focus();
+		return false;
+	}
+	
+	var comments = $("#ratingComments").val();
+	if(comments=="") {
+		$("#ratingCommentsError").html("Enter Comments");
+		$("#ratingComments").focus();
+		return false;
+	}
+	
+	var comments = $("#ratingComments").val();
+	if(comments=="") {
+		$("#ratingCommentsError").html("Enter Comments");
+		$("#ratingComments").focus();
+		return false;
+	}
+	
+	var stars = $("input[name='ratingStar']").val();
+	if(stars=="") {
+		$("#ratingStarError").html("Rating Required");
+		return false;
+	}
+	var form = $(this)[0]; 
+	var formData = new FormData(form);
+	
+	$("#ratingImageError").html("Please Wait.....");
+	
+	$.ajax({
+		url:site_url+"Admin_Controller/submitRating",
+		data:formData,
+		type:"POST",
+		processData: false,
+		contentType: false,
+		success:function(response)
+		{
+			window.location.href = site_url+"myadmin/ratings"
+
+		},
+		error:function()
+		{
+			$("#ratingImageError").html("");
+			alert("Error,Try Again Later");
+			$('form')[0].reset(); 
+		}
+	});
+});
+
+	/********************************
+		Validation for Admin Editing Rating Form
+	*********************************/
+$("#edit_rating_form").off();
+$("#edit_rating_form").on("submit",function(event) {
+	event.preventDefault();
+	
+	$("#ratingUserNameError").html("");
+	$("#ratingCourseError").html("");
+	$("#ratingCommentsError").html("");
+	$("#ratingStarError").html("");
+	
+	var user_name = $("#ratingUserName").val();
+	if(user_name=="") {
+		$("#ratingUserNameError").html("Enter Name");
+		$("#ratingUserName").focus();
+		return false;
+	}
+	
+	var course_id = $("#ratingCourse").val();
+	if(course_id=="0" || course_id=="") {
+		$("#ratingCourseError").html("Select Course");
+		$("#ratingCourse").focus();
+		return false;
+	}
+	
+	var comments = $("#ratingComments").val();
+	if(comments=="") {
+		$("#ratingCommentsError").html("Enter Comments");
+		$("#ratingComments").focus();
+		return false;
+	}
+	
+	var comments = $("#ratingComments").val();
+	if(comments=="") {
+		$("#ratingCommentsError").html("Enter Comments");
+		$("#ratingComments").focus();
+		return false;
+	}
+	
+	var stars = $("input[name='ratingStar']").val();
+	if(stars=="") {
+		$("#ratingStarError").html("Rating Required");
+		return false;
+	}
+	var form = $(this)[0]; 
+	var formData = new FormData(form);
+	
+	$("#ratingImageError").html("Please Wait.....");
+	
+	$.ajax({
+		url:site_url+"Admin_Controller/submitEditedRating",
+		data:formData,
+		type:"POST",
+		processData: false,
+		contentType: false,
+		success:function(response)
+		{
+			window.location.href = site_url+"myadmin/ratings"
+		},
+		error:function()
+		{
+			$("#ratingImageError").html("");
+			alert("Error,Try Again Later");
+			$('form')[0].reset(); 
+		}
+	});
+});
