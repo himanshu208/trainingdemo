@@ -284,8 +284,26 @@ class Home_Model extends CI_Model
 			}				
 		/********************************
 			End Methods used in Enquiry Information Store
-		*********************************/		
-		
+		*********************************/	
+
+	/********************************
+		Start Methods used while rating submission
+	*********************************/	
+	function ratingUserDetails($user_id) {
+		$this->db->select("*");
+		$this->db->from("user");
+		$this->db->where("user_id",$user_id);
+		$query = $this->db->get();
+		if($query->num_rows()>0) {
+			$response = $query->result();
+		} else {
+			$response = array();
+		}
+		return $response;
+	}
+	/********************************
+		End Methods used while rating submission
+	*********************************/	
 }
 	
 ?>

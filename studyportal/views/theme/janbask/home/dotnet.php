@@ -62,7 +62,10 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=1863665380325677&ev=PageView&noscript=1"
 /></noscript>
 <!-- DO NOT MODIFY -->
-<!-- End Facebook Pixel Code --></head>
+<!-- End Facebook Pixel Code -->
+
+<link rel="stylesheet" href="<?php	echo site_url('assets/css/rating.css');	?>">
+</head>
 
 <body id="home">
 <div class="overlaybg"> </div>
@@ -600,6 +603,7 @@ src="https://www.facebook.com/tr?id=1863665380325677&ev=PageView&noscript=1"
     </div>
   </div>
 </section>
+
 <section id="fq" class="padding-top-bottom " style="background-color:#FFF">
   <div class="container-fluid">
     <div class="row">
@@ -663,8 +667,67 @@ src="https://www.facebook.com/tr?id=1863665380325677&ev=PageView&noscript=1"
     </div>
   </div>
 </section>
+
+<section class="padding-top-bottom " style="background-color:#FFF">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col text-left col-xs-12 col-sm-12 col-md-2 col-lg-2"> </div>
+				<div class="col-md-12 col-sm-10 col-lg-10 col-xs-12 wow fadeInLeft" align="left">
+					<?php
+						if ($userEnrollStatus["UserLoggedIn"]=="1" && $userEnrollStatus["userEnrollStatus"]=="1") {
+					?>
+							<p>Share your experience with the course</p>
+							<?php	echo form_open_multipart("",array("id"=>"clientRatingForm"));	?>
+							
+								<input type="hidden" id="course_id" name="course_id" value="<?php echo $userEnrollStatus["course_id"];?>">
+								
+								<input type="hidden" id="user_id" name="user_id" value="<?php echo $userEnrollStatus["user_id"];?>">
+								<div class="content">
+									<div class="form-group">
+										<?php	echo form_textarea(array("class"=>"form-control","placeholder"=>"ENTER Comments","id"=>"clientRatingComment","name"=>"clientRatingComment"));	?>
+										<span class="validation-error" id="clientRatingCommentError"></span>
+									</div>
+									
+									<div class="form-group">
+										<fieldset class="rating">
+											
+											<?php	echo form_radio(array("id"=>"star5","name"=>"clientRatingStar","value"=>"5","title"=>"5 Star"));	?>
+											<label class = "full" for="star5" title="Awesome - 5 stars"></label>
+											
+											<?php	echo form_radio(array("id"=>"star4","name"=>"clientRatingStar","value"=>"4","title"=>"4 Star"));	?>
+											<label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+											
+											<?php	echo form_radio(array("id"=>"star3","name"=>"clientRatingStar","value"=>"3","title"=>"3 Star"));	?>
+											<label class = "full" for="star3" title="Meh - 3 stars"></label>
+											
+											<?php	echo form_radio(array("id"=>"star2","name"=>"clientRatingStar","value"=>"2","title"=>"2 Star"));	?>
+											<label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+
+											<?php	echo form_radio(array("id"=>"star1","name"=>"clientRatingStar","value"=>"1","title"=>"1 Star" ) );	?>
+											<label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+										</fieldset>
+										<span class="validation-error" id="clientRatingStarError"></span>
+									</div>
+									
+									<div class="form-group" align="center">
+										<span class="validation-error" id="clientRatingSuccessMessage"></span>
+										<?php	echo form_submit(array("class"=>"btn btn-store","value"=>"Submit"));	?>
+									</div>
+													
+								</div>
+							<?php	echo form_close();	?>
+					<?php
+						}
+					?>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
 <?php	$this->load->view($this->config->item("tree_template_include")."footer");	?>
 <script type="text/javascript" src="<?php	echo site_url('assets/js/common_functions.js');	?>"></script>
 <script type="text/javascript" src="<?php	echo site_url('assets/js/home_js.js');	?>"></script>
+<script type="text/javascript" src="<?php	echo site_url('assets/js/cutom_validations.js');	?>"></script> 
 </body>
 </html>

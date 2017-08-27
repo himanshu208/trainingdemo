@@ -752,7 +752,7 @@ class Admin_Controller extends Front_Controller
 		$data['list_arr']=$this->AM->adminEnquiryList();		
 		$this->load->view($this->_admin_enquiries,$data);
 	}
-	public function dailydeals()
+		public function dailydeals()
 	{
 		$this->checkAdminLoginSession();
 		$data['page'] = '123';
@@ -791,29 +791,146 @@ class Admin_Controller extends Front_Controller
 		
 		$this->load->view($this->_admin_dailydeals,$data);
 	} 
-	/**********************************
-		Start Functions related to ratings page on Admin
-	************************************/
-	public function ratings() {
-		$this->checkAdminLoginSession();
-		$data['page'] = '123';
-		$data['list_arr']=$this->AM->adminEnquiryList();		
-		$data['rating_arr']=$this->AM->userRatings();		
-		$this->load->view($this->_admin_ratings,$data);
-	}
-	/**********************************
-		End Functions related to ratings page on Admin
-	************************************/
 	
 	/**********************************
 		Start Functions related to ratings page on Admin
 	************************************/
+		/*Start function to create view for rating listing*/
+	public function ratings() {
+		$this->checkAdminLoginSession();	
+		$data['rating_arr']=$this->AM->userRatings();		
+		$this->load->view($this->_admin_ratings,$data);
+	}
+		/*End function to create view for rating listing*/
+
+		/*Start function to create view for add rating*/
 	public function add_rating() {
+		
 		$this->checkAdminLoginSession();
-		// $data['currencies'] = $this->AM->fetchCurrencyList();
 		$data['course_arr']=$this->AM->courseList();
 		$this->load->view($this->_admin_add_rating,$data);
 	}
+		/*End function to create view for add rating*/
+		
+		/*Start function to create new rating entry*/
+	public function submitRating() {
+		
+		$this->checkAdminLoginSession();
+		$user_name = $this->input->post('ratingUserName');
+		$course_id = $this->input->post('ratingCourse');
+		$comments = $this->input->post('ratingComments');
+		// $stars = $this->input->post('ratingStar');
+		$stars = 5;
+		
+		$image_name = "defaultuser.jpg";
+		if(isset($_FILES["ratingUserImage"]["name"]) && !empty($_FILES["ratingUserImage"]["name"])) {
+			
+			$extension_1 = explode(".", $_FILES['ratingUserImage']['name']);
+			$extension = end($extension_1);
+			$rating_image_name = "user".rand().'.'.$extension;
+			$config['upload_path'] =  $this->config->item("DIR_ROOT_IMAGE")."user/profile_pic/";
+			$config['file_name'] = $rating_image_name;
+			$config['allowed_types'] = '*';
+			$this->load->library('upload', $config);
+			if (!$this->upload->do_upload('ratingUserImage')) {
+				
+				$error = array('error' => $this->upload->display_errors());
+			} else {
+				
+				$data = array('upload_data' => $this->upload->data()); 
+				$image_name = $rating_image_name;
+			}
+		}
+		
+		$create_date = date('Y-m-d');
+		$rating_data = array('course_id'=>$course_id,'stars'=>$stars,'comments'=>$comments,'status'=>"1","is_admin_added"=>"1","user_name"=>$user_name,"user_image"=>$image_name,"create_date"=>$create_date);
+		
+		$status = $this->AM->inesertNewRating($rating_data);
+		if($status==1) {
+			$this->session->set_flashdata('action_message', 'Rating Added Successfully');
+			$response = array('rating_added'=>'1');
+		}
+		else {
+			$this->session->set_flashdata('error_message', 'Error Occured,Contact Admin');
+			$response = array('rating_added'=>'0');
+		}
+		echo json_encode($response);
+		die();
+	}
+			/*End function to create new rating entry*/
+			
+		/*Start function to create view for edit rating*/	
+	public function edit_rating() {
+		
+		$this->checkAdminLoginSession();
+		$rating_id = $this->uri->segment(3);
+		
+		$data['course_arr']=$this->AM->courseList();
+		$data['rating_data'] = $this->AM->getSingleRatingData($rating_id);
+		if(empty($data['rating_data'])) {
+			$this->session->set_flashdata('error_message', 'Invalid Request');
+			redirect(site_url('myadmin/ratings'));	
+		}
+		$this->load->view($this->_admin_edit_rating,$data);
+	}
+		/*End function to create view for edit rating*/	
+		
+		/*Start function to edit existing rating entry*/
+	public function submitEditedRating() {
+		
+		$this->checkAdminLoginSession();
+		$rating_id = $this->input->post('rating_id');
+		$user_name = $this->input->post('ratingUserName');
+		$course_id = $this->input->post('ratingCourse');
+		$comments = $this->input->post('ratingComments');
+		
+		$image_name = $this->input->post('userImage');
+		// $stars = $this->input->post('ratingStar');
+		$stars = 4;
+		
+		if(isset($_FILES["ratingUserImage"]["name"]) && !empty($_FILES["ratingUserImage"]["name"])) {
+			
+			$extension_1 = explode(".", $_FILES['ratingUserImage']['name']);
+			$extension = end($extension_1);
+			$rating_image_name = "user".rand().'.'.$extension;
+			$config['upload_path'] =  $this->config->item("DIR_ROOT_IMAGE")."user/profile_pic/";
+			$config['file_name'] = $rating_image_name;
+			$config['allowed_types'] = '*';
+			$this->load->library('upload', $config);
+			if (!$this->upload->do_upload('ratingUserImage')) {
+				
+				$error = array('error' => $this->upload->display_errors());
+			} else {
+				
+				$data = array('upload_data' => $this->upload->data()); 
+				$image_name = $rating_image_name;
+			}
+		}
+		
+		$create_date = date('Y-m-d');
+		$rating_data = array('course_id'=>$course_id,'stars'=>$stars,'comments'=>$comments,'status'=>"1","user_name"=>$user_name,"user_image"=>$image_name);
+		
+		$status = $this->AM->editRating($rating_data,$rating_id);
+		if($status==1) {
+			$this->session->set_flashdata('action_message', 'Rating Updated Successfully');
+			$response = array('rating_added'=>'1');
+		}
+		else {
+			$this->session->set_flashdata('error_message', 'Error Occured,Contact Admin');
+			$response = array('rating_added'=>'0');
+		}
+		echo json_encode($response);
+		die();
+	}
+		/*End function to edit existing rating entry*/
+		
+		/*Start function to create view for new rating requests*/
+	public function new_rating_requests() {
+		$this->checkAdminLoginSession();	
+		$data['rating_arr']=$this->AM->newRatingRequest();		
+		$this->load->view($this->_admin_new_rating_requests,$data);
+	}
+		/*End function to create view for new rating requests*/
 	/**********************************
 		End Functions related to ratings page on Admin
 	************************************/

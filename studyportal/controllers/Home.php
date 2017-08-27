@@ -267,6 +267,29 @@ public function submit_daily_deal()
 			echo json_encode(array("status"=>"0"));
 			die();
 		}
-		
 	}	
+	
+	public function submitRating() {
+		if(isset($_POST) && !empty($_POST)) {
+			$user_id = $this->input->post("user_id");
+			$course_id = $this->input->post("course_id");
+			$comments = $this->input->post("comments");
+			$stars = $this->input->post("stars");
+			$userDetails = $this->HM->ratingUserDetails($user_id);
+			
+			$create_date = date('Y-m-d');
+			$rating_data = array('course_id'=>$course_id,'user_id'=>$user_id,'stars'=>$stars,'comments'=>$comments,'status'=>"0","is_admin_added"=>"0","user_name"=>$userDetails[0]->name,"user_email"=>$userDetails[0]->email,"user_image"=>$userDetails[0]->image,"create_date"=>$create_date);
+			
+			$status = $this->AM->inesertNewRating($rating_data);
+			if ($status=="1") {
+				$return = array("rating"=>"1");
+			} else {
+				$return = array("rating"=>"0");
+			}
+			echo json_encode($return);
+			die();
+		} else {
+			redirect(site_url);	
+		}
+	}
 }
