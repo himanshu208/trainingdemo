@@ -10,7 +10,7 @@
  */
 $config["tree_template_dir"] = "";
 $config["SITE_ROOT_IMAGE"] ="http://".$_SERVER['HTTP_HOST']."/dotnetwp/assets/sitefiles/images/";
-$config["DIR_ROOT_IMAGE"] = $_SERVER['DOCUMENT_ROOT']."/dev/assets/sitefiles/images/";
+$config["DIR_ROOT_IMAGE"] = $_SERVER['DOCUMENT_ROOT']."/assets/sitefiles/images/";
 
 $config["tree_template"] = $config["tree_template_dir"] . "theme/janbask/home/";
 $config["tree_template_include"] = $config["tree_template_dir"]."theme/janbask/home/include/";

@@ -35,17 +35,7 @@ class Courses extends Front_Controller
 	public function java()
 	{
 		$course_id = 1;
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
-		
-		$user_id = $this->session->userdata("user_id");
-		
-		if($user_id!="") {
-			$data["userEnrollStatus"] = $this->CM->userEnrollStatus($course_id,$user_id);
-		} else {
-			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
-		}
-
 		$this->load->view($this->_java_container,$data);
 	}
 	
@@ -79,16 +69,6 @@ class Courses extends Front_Controller
 	public function dotnet()
 	{
 		$course_id = 2;
-		
-		$user_id = $this->session->userdata("user_id");
-		
-		if($user_id!="") {
-			$data["userEnrollStatus"] = $this->CM->userEnrollStatus($course_id,$user_id);
-		} else {
-			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
-		}
-		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_dotnet_container,$data);
 	}
@@ -122,17 +102,8 @@ class Courses extends Front_Controller
 	*/
 	public function ba()
 	{
+		
 		$course_id = 7;
-		
-		$user_id = $this->session->userdata("user_id");
-		
-		if($user_id!="") {
-			$data["userEnrollStatus"] = $this->CM->userEnrollStatus($course_id,$user_id);
-		} else {
-			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
-		}
-		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_ba_container,$data);
 	}
@@ -145,16 +116,6 @@ class Courses extends Front_Controller
 	public function qa()
 	{
 		$course_id = 5;
-		
-		$user_id = $this->session->userdata("user_id");
-		
-		if($user_id!="") {
-			$data["userEnrollStatus"] = $this->CM->userEnrollStatus($course_id,$user_id);
-		} else {
-			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
-		}
-		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_qa_container,$data);
 	}
@@ -200,16 +161,6 @@ class Courses extends Front_Controller
 	public function salesforce()
 	{
 		$course_id = 3;
-		
-		$user_id = $this->session->userdata("user_id");
-		
-		if($user_id!="") {
-			$data["userEnrollStatus"] = $this->CM->userEnrollStatus($course_id,$user_id);
-		} else {
-			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
-		}
-		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_salesforce_container,$data);
 	}
@@ -266,16 +217,6 @@ class Courses extends Front_Controller
 	public function pmp()
 	{
 		$course_id = 6;
-		
-		$user_id = $this->session->userdata("user_id");
-		
-		if($user_id!="") {
-			$data["userEnrollStatus"] = $this->CM->userEnrollStatus($course_id,$user_id);
-		} else {
-			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
-		}
-		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_pmp_container,$data);
 	}
@@ -288,16 +229,6 @@ class Courses extends Front_Controller
 	public function hadoop()
 	{
 		$course_id = 4;
-		
-		$user_id = $this->session->userdata("user_id");
-		
-		if($user_id!="") {
-			$data["userEnrollStatus"] = $this->CM->userEnrollStatus($course_id,$user_id);
-		} else {
-			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
-		}
-		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_hadoop_container,$data);
 	}
@@ -354,16 +285,6 @@ class Courses extends Front_Controller
 	public function aws()
 	{
 		$course_id = 17;
-		
-		$user_id = $this->session->userdata("user_id");
-		
-		if($user_id!="") {
-			$data["userEnrollStatus"] = $this->CM->userEnrollStatus($course_id,$user_id);
-		} else {
-			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
-		}
-		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_aws_container,$data);
 	}
@@ -429,16 +350,6 @@ class Courses extends Front_Controller
 	public function android()
 	{
 		$course_id = 9;
-		
-		$user_id = $this->session->userdata("user_id");
-		
-		if($user_id!="") {
-			$data["userEnrollStatus"] = $this->CM->userEnrollStatus($course_id,$user_id);
-		} else {
-			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
-		}
-		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_android_container,$data);
 	}
@@ -451,16 +362,6 @@ class Courses extends Front_Controller
 	public function ios()
 	{
 		$course_id = 8;
-		
-		$user_id = $this->session->userdata("user_id");
-		
-		if($user_id!="") {
-			$data["userEnrollStatus"] = $this->CM->userEnrollStatus($course_id,$user_id);
-		} else {
-			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
-		}
-		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_ios_container,$data);
 	}
@@ -473,16 +374,6 @@ class Courses extends Front_Controller
 	public function digital_marketing()
 	{
 		$course_id = 13;
-		
-		$user_id = $this->session->userdata("user_id");
-		
-		if($user_id!="") {
-			$data["userEnrollStatus"] = $this->CM->userEnrollStatus($course_id,$user_id);
-		} else {
-			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
-		}
-		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_digital_marketing,$data);
 	}
@@ -495,16 +386,6 @@ class Courses extends Front_Controller
 	public function oracle_dba()
 	{
 		$course_id = 11;
-		
-		$user_id = $this->session->userdata("user_id");
-		
-		if($user_id!="") {
-			$data["userEnrollStatus"] = $this->CM->userEnrollStatus($course_id,$user_id);
-		} else {
-			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
-		}
-		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_oracle_dba,$data);
 	}
@@ -517,16 +398,6 @@ class Courses extends Front_Controller
 	public function sql()
 	{
 		$course_id = 10;
-		
-		$user_id = $this->session->userdata("user_id");
-		
-		if($user_id!="") {
-			$data["userEnrollStatus"] = $this->CM->userEnrollStatus($course_id,$user_id);
-		} else {
-			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
-		}
-		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_sql,$data);
 	}
@@ -539,16 +410,6 @@ class Courses extends Front_Controller
 	public function data_science()
 	{
 		$course_id = 12;
-		
-		$user_id = $this->session->userdata("user_id");
-		
-		if($user_id!="") {
-			$data["userEnrollStatus"] = $this->CM->userEnrollStatus($course_id,$user_id);
-		} else {
-			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
-		}
-		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_data_science,$data);
 	}
@@ -561,16 +422,6 @@ class Courses extends Front_Controller
 	public function vmware()
 	{
 		$course_id = 14;
-		
-		$user_id = $this->session->userdata("user_id");
-		
-		if($user_id!="") {
-			$data["userEnrollStatus"] = $this->CM->userEnrollStatus($course_id,$user_id);
-		} else {
-			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
-		}
-		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_vmware,$data);
 	}
@@ -583,16 +434,6 @@ class Courses extends Front_Controller
 	public function devops()
 	{
 		$course_id = 15;
-		
-		$user_id = $this->session->userdata("user_id");
-		
-		if($user_id!="") {
-			$data["userEnrollStatus"] = $this->CM->userEnrollStatus($course_id,$user_id);
-		} else {
-			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
-		}
-		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_devops,$data);
 	}
