@@ -408,15 +408,15 @@ $("#logindiv").css("display", "none");
 $("#loginbtn2").click(function() {
 var name = $("#name").val();
 var email = $("#email").val();
-var mobile = $("#mobile").val();
-if (name == "" || email == "" || mobile == ""){
-alert("All Fields are required.");
+var phone = $("#phone").val();
+if (name == "" || email == "" || phone == ""){
+alert("Please Fill All Fields");
 }else{
-	$.post( "https://www.janbasktraining.com/submit_popup_form1",$( "#login2" ).serialize(), function( data ) {
+	$.post( "https://www.jbwork.in/dev/submit_daily_deal",$( "#login2" ).serialize(), function( data ) {
 //alert(data);
 var obj = JSON.parse(data);
 alert(obj.msg);
-$("#logindiv2").css("display", "none");
+$("#logindiv21").css("display", "none");
 });
 
 }
@@ -457,8 +457,8 @@ $("#logindiv2").css("display", "none");
 
 <?php } ?>
 <div id="logindiv21"  class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
-<form class="form" action="#" id="login2" style=" position: relative; background-color:#EEA508 !important;">
-<p  align="center" style="font-size:35px; padding-top:10px; color:#fff !important;">No Problem!</p>
+<form class="form" action="" id="login2" style=" position: relative; background-color:#EEA508 !important;">
+<p  align="center" style="font-size:35px; padding-top:10px; color:#fff !important;">Daily Deals</p>
 <p class="headpop" align="center" style="font-size:20px; padding-top:10px; color:#fff !important;"> Instead I would prefer to receive Free News Letters?
 </p>
 
@@ -468,7 +468,7 @@ $("#logindiv2").css("display", "none");
 <input type="text" id="name" name="name" placeholder="Name"/>
 </div>
 <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12" style="padding:5px 5px !important;">
-<input type="text" id="mobile" name="mobile" placeholder=" Phone No."/>
+<input type="text" id="phone" name="phone" placeholder=" Phone No."/>
 
 </div>
 <input type="text" id="email2" name="email" placeholder="Email to Get Discount"/><br/>

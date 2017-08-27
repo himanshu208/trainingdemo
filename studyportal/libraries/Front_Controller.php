@@ -121,6 +121,9 @@ class Front_Controller extends My_Controller
 		$this->_admin_coupon = $this->config->item("admin_template") . "coupon.php";
 		$this->_admin_add_new_coupon = $this->config->item("admin_template") . "add-new-coupon.php";
 		$this->_admin_enquiries = $this->config->item("admin_template") . "admin_enquiries.php";
+		$this->_admin_dailydeals = $this->config->item("admin_template") . "admin_dailydeals.php";
+		$this->_admin_ratings = $this->config->item("admin_template") . "ratings/listing.php";
+		$this->_admin_add_rating = $this->config->item("admin_template") . "ratings/add-rating.php";
 		//$this->_admin_contact_us_enquiries = $this->config->item("admin_template") . "contact-us-enquiries.php";
 		//$this->_admin_course_page_enquiry = $this->config->item("admin_template")."admin_course_page_enquiry.php";
 		//$this->_admin_non_course_enquiry = $this->config->item("admin_template")."non_course_enquiry.php";

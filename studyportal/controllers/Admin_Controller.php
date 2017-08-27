@@ -58,14 +58,7 @@ class Admin_Controller extends Front_Controller
 	{
 		$this->checkAdminLoginSession();
 		$data['page'] = '123';
-		//print_r($_POST);	
-		if(!empty($_POST['status'])){
-			$id = $_POST['id'];
-			$status = ($_POST['status']=="Active")?"1":"0";
-			$data = array("email_verified"=>$status);
-			$this->AM->updateStatus($data,$id);
-		}
-		$data['user_arr']=$this->AM->userList();	
+		$data['user_arr']=$this->AM->userList();		
 		$this->load->view($this->_admin_users,$data);
 	}
 	/**********************************
@@ -759,6 +752,71 @@ class Admin_Controller extends Front_Controller
 		$data['list_arr']=$this->AM->adminEnquiryList();		
 		$this->load->view($this->_admin_enquiries,$data);
 	}
+	public function dailydeals()
+	{
+		$this->checkAdminLoginSession();
+		$data['page'] = '123';
+			
+		if(isset($_POST) && !empty($_POST)) { //print_r($_POST);
+			
+			$id=$this->input->post("id");
+			$name=$this->input->post("name");
+			$send_coupon=$this->input->post("send_coupon");
+			$email=$this->input->post("email");
+			//$course=$this->input->post("course");
+			//$location=$this->input->post("location");
+			$data_arr=array("name"=>$name,"email"=>$email,"send_coupon"=>$send_coupon);
+			$this->AM->updateCoupon($send_coupon,$id);	
+			///////////////////////////////////////
+			$this->_contact_enquiry = $this->config->item("email_template") . "coupon_sent.php";
+			$html= $this->load->view($this->_contact_enquiry,$data_arr,true);
+			$this->email->clear(TRUE);
+			$config['charset'] = 'iso-8859-1';
+			$config['wordwrap'] = TRUE;
+			$config['mailtype'] = 'html';
+			$this->email->initialize($config);
+			$this->email->from("noreply@janbasktraining.com","Janbask Training");
+			$this->email->to($email);
+			//$this->email->to("tarun.arora@janbask.com,training@janbask.com, rohit.batra@janbask.com, jiten.miglani@janbask.com");
+			/* $this->email->bcc('navin.3434@gmail.com'); */
+			$this->email->subject( 'Coupon from JanBaskTraining');
+			$this->email->message($html);
+			$this->email->send();
+			/////////////////////////////////////////
+			$data["msg"]="Thank you Coupon sent successfully!";
+	
+		}
+		$data['list_arr']=$this->AM->adminDailyDealsList();		
+		$data['couponlist_arr']=$this->AM->couponList();
+		
+		$this->load->view($this->_admin_dailydeals,$data);
+	} 
+	/**********************************
+		Start Functions related to ratings page on Admin
+	************************************/
+	public function ratings() {
+		$this->checkAdminLoginSession();
+		$data['page'] = '123';
+		$data['list_arr']=$this->AM->adminEnquiryList();		
+		$data['rating_arr']=$this->AM->userRatings();		
+		$this->load->view($this->_admin_ratings,$data);
+	}
+	/**********************************
+		End Functions related to ratings page on Admin
+	************************************/
+	
+	/**********************************
+		Start Functions related to ratings page on Admin
+	************************************/
+	public function add_rating() {
+		$this->checkAdminLoginSession();
+		// $data['currencies'] = $this->AM->fetchCurrencyList();
+		$data['course_arr']=$this->AM->courseList();
+		$this->load->view($this->_admin_add_rating,$data);
+	}
+	/**********************************
+		End Functions related to ratings page on Admin
+	************************************/
 	/* public function course_page_enquiry()
 	{
 		$this->checkAdminLoginSession();

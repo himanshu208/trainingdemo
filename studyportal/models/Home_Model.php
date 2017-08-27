@@ -244,6 +244,22 @@ class Home_Model extends CI_Model
 			{
 				$this->db->insert('common_enuiry',$data_arr);
 			}	
+			/**Function to store Daily Deals **/		
+			function storeDailyDealsEnquiry($data_arr)
+			{
+				$this->db->select("*");
+				$this->db->from("daily_deals");
+				$this->db->where($data_arr);
+				$query = $this->db->get();
+				if($query->num_rows()==0)
+				{
+					$this->db->insert('daily_deals',$data_arr);
+					return true;
+				}else{
+					return false;
+				}
+				
+			}
 		
 		/**Function to check Newsletter Email**/
 			function checkNewsletterEmail($email)

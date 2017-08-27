@@ -54,6 +54,7 @@ class Admin_Model extends CI_Model
 		}
 		return false;
 	}
+	
 	/********************************
 		End Methods used on Admin Login Page
 	*********************************/
@@ -630,6 +631,31 @@ class Admin_Model extends CI_Model
 		}
 		return $corp_enq;
 	}	
+	function adminDailyDealsList()
+	{
+		$this->db->select("*");
+		$this->db->from("daily_deals");
+		$this->db->order_by("id desc");	
+		$query = $this->db->get();
+		if($query->num_rows()>0)
+		{
+			$corp_enq = $query->result();
+		}
+		else
+		{
+			$corp_enq = array();
+		}
+		return $corp_enq;
+	}
+	function updateCoupon($coupon,$id)
+	{
+		$this->db->where('id',$id);
+		if($this->db->update('daily_deals',array("coupon"=>$coupon)))
+		{
+			return true;
+		}
+		return false;
+	}
 	function contactPageEnquiryList()
 	{
 		$this->db->select("ace.*");
@@ -820,7 +846,26 @@ class Admin_Model extends CI_Model
 	{
 		$this->db->where($table_id_name,$table_id);
 		$this->db->delete($table_name);
-	}		
+	}	
+
+	/**********************************
+		Start Functions to fetch admin approved ratings
+	************************************/	
+	function userRatings() {
+		$this->db->select("*");
+		$this->db->from("jb_rating");
+		$this->db->where("status","0");
+		$query = $this->db->get();
+		if($query->num_rows()>0) {
+			$result = $query->result();
+		} else {
+			$result = array();
+		}
+		return $result;		
+	}
+	/**********************************
+		End Functions to fetch admin approved ratings
+	************************************/
 }
 	
 ?>
