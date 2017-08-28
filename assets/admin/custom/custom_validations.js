@@ -1168,18 +1168,13 @@ $("#add_new_rating_form").on("submit",function(event) {
 		return false;
 	}
 	
-	var comments = $("#ratingComments").val();
-	if(comments=="") {
-		$("#ratingCommentsError").html("Enter Comments");
-		$("#ratingComments").focus();
+	var stars = $("#ratingStar").val();
+	if(stars=="") {
+		$("#ratingStarError").html("Rating Required");
+		$("#ratingStar").focus();
 		return false;
 	}
 	
-	var stars = $("input[name='ratingStar']").val();
-	if(stars=="") {
-		$("#ratingStarError").html("Rating Required");
-		return false;
-	}
 	var form = $(this)[0]; 
 	var formData = new FormData(form);
 	
@@ -1238,16 +1233,10 @@ $("#edit_rating_form").on("submit",function(event) {
 		return false;
 	}
 	
-	var comments = $("#ratingComments").val();
-	if(comments=="") {
-		$("#ratingCommentsError").html("Enter Comments");
-		$("#ratingComments").focus();
-		return false;
-	}
-	
-	var stars = $("input[name='ratingStar']").val();
+	var stars = $("#ratingStar").val();
 	if(stars=="") {
 		$("#ratingStarError").html("Rating Required");
+		$("#ratingStar").focus();
 		return false;
 	}
 	var form = $(this)[0]; 
