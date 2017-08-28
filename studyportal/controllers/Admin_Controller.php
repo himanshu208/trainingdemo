@@ -819,8 +819,7 @@ class Admin_Controller extends Front_Controller
 		$user_name = $this->input->post('ratingUserName');
 		$course_id = $this->input->post('ratingCourse');
 		$comments = $this->input->post('ratingComments');
-		// $stars = $this->input->post('ratingStar');
-		$stars = 5;
+		$stars = $this->input->post('ratingStar');
 		
 		$image_name = "defaultuser.jpg";
 		if(isset($_FILES["ratingUserImage"]["name"]) && !empty($_FILES["ratingUserImage"]["name"])) {
@@ -885,8 +884,7 @@ class Admin_Controller extends Front_Controller
 		$comments = $this->input->post('ratingComments');
 		
 		$image_name = $this->input->post('userImage');
-		// $stars = $this->input->post('ratingStar');
-		$stars = 4;
+		$stars = $this->input->post('ratingStar');
 		
 		if(isset($_FILES["ratingUserImage"]["name"]) && !empty($_FILES["ratingUserImage"]["name"])) {
 			
