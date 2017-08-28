@@ -73,23 +73,7 @@
 									<div class="control-group">
 										<label class="control-label">Ratings</label>
 										<div class="controls">
-											<fieldset class="rating">
-												
-												<?php	echo form_radio(array("id"=>"star5","name"=>"ratingStar","value"=>"5","title"=>"5 Star"));	?>
-												<label class = "full" for="star5" title="Awesome - 5 stars"></label>
-												
-												<?php	echo form_radio(array("id"=>"star4","name"=>"ratingStar","value"=>"4","title"=>"4 Star"));	?>
-												<label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-												
-												<?php	echo form_radio(array("id"=>"star3","name"=>"ratingStar","value"=>"3","title"=>"3 Star"));	?>
-												<label class = "full" for="star3" title="Meh - 3 stars"></label>
-												
-												<?php	echo form_radio(array("id"=>"star2","name"=>"ratingStar","value"=>"2","title"=>"2 Star"));	?>
-												<label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-
-												<?php	echo form_radio(array("id"=>"star1","name"=>"ratingStar","value"=>"1","title"=>"1 Star" ) );	?>
-												<label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-											</fieldset>
+											<?php	echo form_input(array("type"=>"text","class"=>"span11","placeholder"=>"Rating Stars","id"=>"ratingStar","name"=>"ratingStar"));	?>
 											<div style='color:#666' class="admin-validation-error" id="ratingStarError"></div>
 										</div>
 									</div>
