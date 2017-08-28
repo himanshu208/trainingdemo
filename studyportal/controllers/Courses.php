@@ -35,7 +35,7 @@ class Courses extends Front_Controller
 	public function java()
 	{
 		$course_id = 1;
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
+		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		
 		$user_id = $this->session->userdata("user_id");
@@ -88,7 +88,7 @@ class Courses extends Front_Controller
 			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
 		}
 		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
+		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_dotnet_container,$data);
 	}
@@ -132,7 +132,7 @@ class Courses extends Front_Controller
 			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
 		}
 		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
+		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_ba_container,$data);
 	}
@@ -154,7 +154,7 @@ class Courses extends Front_Controller
 			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
 		}
 		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
+		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_qa_container,$data);
 	}
@@ -209,7 +209,7 @@ class Courses extends Front_Controller
 			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
 		}
 		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
+		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_salesforce_container,$data);
 	}
@@ -275,7 +275,7 @@ class Courses extends Front_Controller
 			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
 		}
 		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
+		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_pmp_container,$data);
 	}
@@ -297,7 +297,7 @@ class Courses extends Front_Controller
 			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
 		}
 		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
+		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_hadoop_container,$data);
 	}
@@ -363,7 +363,7 @@ class Courses extends Front_Controller
 			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
 		}
 		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
+		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_aws_container,$data);
 	}
@@ -438,7 +438,7 @@ class Courses extends Front_Controller
 			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
 		}
 		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
+		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_android_container,$data);
 	}
@@ -460,7 +460,7 @@ class Courses extends Front_Controller
 			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
 		}
 		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
+		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_ios_container,$data);
 	}
@@ -482,7 +482,7 @@ class Courses extends Front_Controller
 			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
 		}
 		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
+		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_digital_marketing,$data);
 	}
@@ -504,7 +504,7 @@ class Courses extends Front_Controller
 			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
 		}
 		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
+		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_oracle_dba,$data);
 	}
@@ -526,7 +526,7 @@ class Courses extends Front_Controller
 			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
 		}
 		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
+		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_sql,$data);
 	}
@@ -548,7 +548,7 @@ class Courses extends Front_Controller
 			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
 		}
 		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
+		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_data_science,$data);
 	}
@@ -570,7 +570,7 @@ class Courses extends Front_Controller
 			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
 		}
 		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
+		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_vmware,$data);
 	}
@@ -592,7 +592,7 @@ class Courses extends Front_Controller
 			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
 		}
 		
-		$data['ratings'] = $this->CM->checkUserRatings($course_id);
+		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
 		$this->load->view($this->_devops,$data);
 	}
