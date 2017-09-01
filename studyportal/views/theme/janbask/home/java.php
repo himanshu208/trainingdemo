@@ -905,52 +905,30 @@ function showDivs(n) {
 			<div class="row">
 				<div class="col text-left col-xs-12 col-sm-12 col-md-2 col-lg-2"> </div>
 				<div class="col-md-12 col-sm-10 col-lg-10 col-xs-12 wow fadeInLeft" align="left">
+				<?php
+					if (!empty($ratings_arr)) {
+				?>
                 <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 wow fadeInLeft" align="left">
-                <h5 class="inside-banner" style="color:#4D4D4D !important;" align="left">Let’s Hear Them, What They Got In There Bucket For JanBask! </h5>
-            <div class="col-md-4 col-sm-12 col-lg-4 col-xs-12 commnt" align="left" style=" border: solid 1px #f1f1f1; padding:7px; border-radius:7px;">
-            <div class="col-md-3 col-sm-3 col-lg-4 col-xs-4 "><img alt="Online Salesforce Training" src="https://www.jbwork.in/dev/assets/img/sftest3.jpg" class="" width="90" height="90"></div>
-            <div class="col-md-9 col-sm-9 col-lg-8 col-xs-8" align="left" style="">
-                  <h2 style="font-size:22px; line-height:27px; color:#2980B9;">Siva</h2>
-<p align="left" style="font-size:14px; line-height:18px;">I had a great experience of learning Java course from JanBask Training. Course instructor was very knowledgeable, and handed the class very well in terms of making it interactive and interesting.  </p>
-                </div></div> 
-            <div class="col-md-4 col-sm-12 col-lg-4 col-xs-12 commnt" align="left" style=" border: solid 1px #f1f1f1; padding:7px; border-radius:7px;">
-            <div class="col-md-3 col-sm-3 col-lg-4 col-xs-4 "><img alt="Online Salesforce Training" src="https://www.jbwork.in/dev/assets/img/sftest3.jpg" class="" width="90" height="90"></div>
-            <div class="col-md-9 col-sm-9 col-lg-8 col-xs-8" align="left" style="">
-                  <h2 style="font-size:22px; line-height:27px; color:#2980B9;">Siva</h2>
-<p align="left" style="font-size:14px; line-height:18px;">I had a great experience of learning Java course from JanBask Training. Course instructor was very knowledgeable, and handed the class very well in terms of making it interactive and interesting.  </p>
-                </div></div>
-                <div class="col-md-4 col-sm-12 col-lg-4 col-xs-12 commnt" align="left" style=" border: solid 1px #f1f1f1; padding:7px; border-radius:7px;">
-            <div class="col-md-3 col-sm-3 col-lg-4 col-xs-4 "><img alt="Online Salesforce Training" src="https://www.jbwork.in/dev/assets/img/sftest3.jpg" class="" width="90" height="90"></div>
-            <div class="col-md-9 col-sm-9 col-lg-8 col-xs-8" align="left" style="">
-                  <h2 style="font-size:22px; line-height:27px; color:#2980B9;">Siva</h2>
-<p align="left" style="font-size:14px; line-height:18px;">I had a great experience of learning Java course from JanBask Training. Course instructor was very knowledgeable, and handed the class very well in terms of making it interactive and interesting.  </p>
-                </div></div>
-                <div class="col-md-4 col-sm-12 col-lg-4 col-xs-12 commnt" align="left" style=" border: solid 1px #f1f1f1; padding:7px; border-radius:7px;">
-            <div class="col-md-3 col-sm-3 col-lg-4 col-xs-4 "><img alt="Online Salesforce Training" src="https://www.jbwork.in/dev/assets/img/sftest3.jpg" class="" width="90" height="90"></div>
-            <div class="col-md-9 col-sm-9 col-lg-8 col-xs-8" align="left" style="">
-                  <h2 style="font-size:22px; line-height:27px; color:#2980B9;">Siva</h2>
-<p align="left" style="font-size:14px; line-height:18px;">I had a great experience of learning Java course from JanBask Training. Course instructor was very knowledgeable, and handed the class very well in terms of making it interactive and interesting.  </p>
-                </div></div>
-                <div class="col-md-4 col-sm-12 col-lg-4 col-xs-12 commnt" align="left" style=" border: solid 1px #f1f1f1; padding:7px; border-radius:7px;">
-            <div class="col-md-3 col-sm-3 col-lg-4 col-xs-4 "><img alt="Online Salesforce Training" src="https://www.jbwork.in/dev/assets/img/sftest3.jpg" class="" width="90" height="90"></div>
-            <div class="col-md-9 col-sm-9 col-lg-8 col-xs-8" align="left" style="">
-                  <h2 style="font-size:22px; line-height:27px; color:#2980B9;">Siva</h2>
-<p align="left" style="font-size:14px; line-height:18px;">I had a great experience of learning Java course from JanBask Training. Course instructor was very knowledgeable, and handed the class very well in terms of making it interactive and interesting.  </p>
-                </div></div>
-                <div class="col-md-4 col-sm-12 col-lg-4 col-xs-12 commnt" align="left" style=" border: solid 1px #f1f1f1; padding:7px; border-radius:7px;">
-            <div class="col-md-3 col-sm-3 col-lg-4 col-xs-4 "><img alt="Online Salesforce Training" src="https://www.jbwork.in/dev/assets/img/sftest3.jpg" class="" width="90" height="90"></div>
-            <div class="col-md-9 col-sm-9 col-lg-8 col-xs-8" align="left" style="">
-                  <h2 style="font-size:22px; line-height:27px; color:#2980B9;">Siva</h2>
-<p align="left" style="font-size:14px; line-height:18px;">I had a great experience of learning Java course from JanBask Training. Course instructor was very knowledgeable, and handed the class very well in terms of making it interactive and interesting.  </p>
-                </div></div> 
-              
-                
-                
-                
-                    
-                
+					<h5 class="inside-banner" style="color:#4D4D4D !important;" align="left">Let’s Hear Them, What They Got In There Bucket For JanBask! </h5>
+					<?php
+						foreach ($ratings_arr as $rating) {
+					?>
+						<div class="col-md-4 col-sm-12 col-lg-4 col-xs-12 commnt" align="left" style=" border: solid 1px #f1f1f1; padding:7px; border-radius:7px;">
+							<div class="col-md-3 col-sm-3 col-lg-4 col-xs-4 ">
+								<img alt="Online Salesforce Training" src="<?php echo $this->config->item("SITE_ROOT_IMAGE")."user/profile_pic/".$rating->user_image;	?>" class="" width="90" height="90" />
+							</div>
+							<div class="col-md-9 col-sm-9 col-lg-8 col-xs-8" align="left" style="">
+								<h2 style="font-size:22px; line-height:27px; color:#2980B9;"><?php	echo $rating->user_name;	?></h2>
+								<p align="left" style="font-size:14px; line-height:18px;"><?php	echo $rating->comments;	?></p>
+							</div>
+						</div> 
+					<?php
+						}
+					?>
                 </div>
-               
+				<?php
+					}
+				?>
                  <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 wow fadeInLeft" align="left">
 					 <hr style="margin-top:10px !important;">
 					 <?php
