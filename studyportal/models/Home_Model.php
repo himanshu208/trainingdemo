@@ -244,8 +244,7 @@ class Home_Model extends CI_Model
 			{
 				$this->db->insert('common_enuiry',$data_arr);
 			}	
-			/**Function to store Daily Deals **/		
-			function storeDailyDealsEnquiry($data_arr)
+		function storeDailyDealsEnquiry($data_arr)
 			{
 				$this->db->select("*");
 				$this->db->from("daily_deals");
@@ -260,7 +259,6 @@ class Home_Model extends CI_Model
 				}
 				
 			}
-		
 		/**Function to check Newsletter Email**/
 			function checkNewsletterEmail($email)
 			{
@@ -284,8 +282,26 @@ class Home_Model extends CI_Model
 			}				
 		/********************************
 			End Methods used in Enquiry Information Store
-		*********************************/		
-		
+		*********************************/	
+
+	/********************************
+		Start Methods used while rating submission
+	*********************************/	
+	function ratingUserDetails($user_id) {
+		$this->db->select("*");
+		$this->db->from("user");
+		$this->db->where("user_id",$user_id);
+		$query = $this->db->get();
+		if($query->num_rows()>0) {
+			$response = $query->result();
+		} else {
+			$response = array();
+		}
+		return $response;
+	}
+	/********************************
+		End Methods used while rating submission
+	*********************************/	
 }
 	
 ?>

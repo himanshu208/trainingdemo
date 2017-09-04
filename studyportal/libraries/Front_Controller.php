@@ -124,6 +124,8 @@ class Front_Controller extends My_Controller
 		$this->_admin_dailydeals = $this->config->item("admin_template") . "admin_dailydeals.php";
 		$this->_admin_ratings = $this->config->item("admin_template") . "ratings/listing.php";
 		$this->_admin_add_rating = $this->config->item("admin_template") . "ratings/add-rating.php";
+		$this->_admin_edit_rating = $this->config->item("admin_template") . "ratings/edit-rating.php";
+		$this->_admin_new_rating_requests = $this->config->item("admin_template") . "ratings/new-rating-requests.php";
 		//$this->_admin_contact_us_enquiries = $this->config->item("admin_template") . "contact-us-enquiries.php";
 		//$this->_admin_course_page_enquiry = $this->config->item("admin_template")."admin_course_page_enquiry.php";
 		//$this->_admin_non_course_enquiry = $this->config->item("admin_template")."non_course_enquiry.php";

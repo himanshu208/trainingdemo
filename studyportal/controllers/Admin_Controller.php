@@ -752,7 +752,7 @@ class Admin_Controller extends Front_Controller
 		$data['list_arr']=$this->AM->adminEnquiryList();		
 		$this->load->view($this->_admin_enquiries,$data);
 	}
-	public function dailydeals()
+		public function dailydeals()
 	{
 		$this->checkAdminLoginSession();
 		$data['page'] = '123';
@@ -791,26 +791,22 @@ class Admin_Controller extends Front_Controller
 		
 		$this->load->view($this->_admin_dailydeals,$data);
 	} 
-	/**********************************
-		Start Functions related to ratings page on Admin
-	************************************/
-	public function ratings() {
-		$this->checkAdminLoginSession();
-		$data['page'] = '123';
-		$data['list_arr']=$this->AM->adminEnquiryList();		
-		$data['rating_arr']=$this->AM->userRatings();		
-		$this->load->view($this->_admin_ratings,$data);
-	}
-	/**********************************
-		End Functions related to ratings page on Admin
-	************************************/
 	
 	/**********************************
 		Start Functions related to ratings page on Admin
 	************************************/
+		/*Start function to create view for rating listing*/
+	public function ratings() {
+		$this->checkAdminLoginSession();	
+		$data['rating_arr']=$this->AM->userRatings();		
+		$this->load->view($this->_admin_ratings,$data);
+	}
+		/*End function to create view for rating listing*/
+
+		/*Start function to create view for add rating*/
 	public function add_rating() {
+		
 		$this->checkAdminLoginSession();
-		// $data['currencies'] = $this->AM->fetchCurrencyList();
 		$data['course_arr']=$this->AM->courseList();
 		$this->load->view($this->_admin_add_rating,$data);
 	}

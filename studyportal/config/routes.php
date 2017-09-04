@@ -93,9 +93,7 @@ $route['courses/hadoop-admin'] = "Courses/hadoop_admin";
 $route['submit_corporate_enquiry'] = "Home/submit_corporate_enquiry";
 $route['submit_contact_enquiry'] = "Home/submit_contact_enquiry";
 $route['submit_popup_form1'] = "Home/submit_popup_form1";
-
-$route['submit_daily_deal'] = "Home/submit_daily_deal";
-
+$route['submit_daily_deal'] = "Home/submit_daily_deal"; 
 $route['thanks-you'] = "Home/thankyou";
 $route['newsleter_form'] = "Home/newsleter_form";
 $route['courses/hadoop-developer'] = "Courses/hadoop_developer";
@@ -176,6 +174,8 @@ $route['myadmin/enquiries'] = "Admin_Controller/enquiries";
 $route['myadmin/dailydeals'] = "Admin_Controller/dailydeals";
 $route['myadmin/ratings'] = "Admin_Controller/ratings";
 $route['myadmin/add-rating'] = "Admin_Controller/add_rating";
+$route['myadmin/edit-rating/:num'] = "Admin_Controller/edit_rating";
+$route['myadmin/new-rating-requests'] = "Admin_Controller/new_rating_requests";
 /*$route['myadmin/corporate-enquiries'] = "Admin_Controller/corporate_enquiries";
 $route['myadmin/contact-us-enquiries'] = "Admin_Controller/contact_us_enquiries";
 $route['myadmin/non-course-start-enquiry'] = "Admin_Controller/non_course_start_enquiry";
