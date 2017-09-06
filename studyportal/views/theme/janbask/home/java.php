@@ -495,7 +495,7 @@ src="https://www.facebook.com/tr?id=1863665380325677&ev=PageView&noscript=1"
     <span class="sr-only">Next</span>
   </a>--> 
    <a href="javascript:;" onclick="  $('#logindiv21').css('display', 'block');">
-  An exclusive  promo coupon is available on this course for next [ TIMER ] minutes. + CLAIM NOW
+<img src="https://i1.wp.com/analyticsindiamag.com/wp-content/uploads/2016/01/JA_AIM_Banner_LMS.gif"/>
   </a> 
               </div>
             </div>

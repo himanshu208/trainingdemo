@@ -175,7 +175,7 @@ public function submit_popup_form1() {///print_r($_POST); die();
 			$data_arr=array("name"=>$name,"email"=>$email,"phone"=>$phone,"enquiry_date"=>date("Y-m-d"),"course"=>$referer );
 			$res = $this->HM->storeDailyDealsEnquiry($data_arr);
 			if($res ==false){
-				echo json_encode(array("status"=>"0","msg"=>"You can not request for more the one coopon for same course same day."));
+				echo json_encode(array("status"=>"0","msg"=>"You already applied for Today's Deal. Kindly check your email for discount coupon."));
 				die();	
 			}
 			///////////////////////////////////////
@@ -185,15 +185,15 @@ public function submit_popup_form1() {///print_r($_POST); die();
 			$config['charset'] = 'iso-8859-1';
 			$config['wordwrap'] = TRUE;
 			$config['mailtype'] = 'html';
-			$this->email->initialize($config);
+			//$this->email->initialize($config);
 			//$this->email->from("noreply@janbasktraining.com","Janbask Training");
-			$this->email->from($email,$name);
-			$this->email->to("himanshu.208@gmail.com");
+			///$this->email->from($email,$name);
+			///$this->email->to("himanshu.208@gmail.com");
 			//$this->email->to("tarun.arora@janbask.com,training@janbask.com, rohit.batra@janbask.com, jiten.miglani@janbask.com");
 			/* $this->email->bcc('navin.3434@gmail.com');  */
-			$this->email->subject( 'Enquiry from JanBaskTraining PopUp Form');
-			$this->email->message($html);
-			$this->email->send();
+			//$this->email->subject( 'Enquiry from JanBaskTraining PopUp Form');
+			//$this->email->message($html);
+			//$this->email->send();
 			/////////////////////////////////////////
 			echo json_encode(array("status"=>"1","msg"=>"Thanks for checking with us. We have sent you the coupon at your email address entered. We will also call you and ensure you have received the coupon."));
 			die();			

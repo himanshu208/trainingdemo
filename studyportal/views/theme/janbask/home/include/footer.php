@@ -411,6 +411,10 @@ var email = $("#email2").val();
 var phone = $("#phone2").val();
 if (name == "" || email == "" || phone == ""){
 alert("Please Fill All Fields");
+}else if (IsEmail(email)==false){
+alert("Please enter a valid email id");
+}else if (telephoneCheck(phone)==false){
+alert("Please enter a valid phone no like 1 555 555 5555");
 }else{
 	$.post( "https://www.jbwork.in/dev/submit_daily_deal",$( "#login2" ).serialize(), function( data ) {
 //alert(data);
@@ -421,7 +425,16 @@ $("#logindiv21").css("display", "none");
 
 }
 });
-});</script>
+});
+function telephoneCheck(str) {
+  var a = /^(1\s|1|)?((\(\d{3}\))|\d{3})(\-|\s)?(\d{3})(\-|\s)?(\d{4})$/.test(str);
+  return a;
+}
+function IsEmail(email) {
+		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+		return regex.test(email);
+	}
+</script>
 
 <?php if(empty($_SESSION['popup'])){ $_SESSION['popup'] = 1; ?>
 <div id="logindiv" class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
