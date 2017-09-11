@@ -4,13 +4,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Courses extends Front_Controller
 {
 	private $ipInfo = null;
+	private $priceInfo = null;
 	
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->helper('jb');
-		$this->ipInfo = file_get_contents('http://ip-api.com/json/' . $_SERVER['REMOTE_ADDR']);
+		
+		if (!empty($_SERVER['HTTP_CLIENT_IP']))   //check ip from share internet
+		{
+			$visitorIp = $_SERVER['HTTP_CLIENT_IP'];
+		}
+		elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))   //to check ip is pass from proxy
+		{
+			$visitorIp = $_SERVER['HTTP_X_FORWARDED_FOR'];
+		}
+		else
+		{
+			$visitorIp = $_SERVER['REMOTE_ADDR'];
+		}
+	
+		$this->ipInfo = file_get_contents('http://ip-api.com/json/' . $visitorIp);
 		$this->ipInfo = json_decode($this->ipInfo,true);	
+		
+		$this->priceInfo = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$visitorIp));
 	}
 	/**
 	 * Index Page for this controller.
@@ -38,8 +55,8 @@ class Courses extends Front_Controller
 	*/
 	public function java()
 	{
-		echo $this->ipInfo["timezone"];
-		
+		$userTimeZone = $this->ipInfo["timezone"];
+		// print_r($this->ipInfo);
 		$course_id = 1;
 		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
@@ -51,7 +68,8 @@ class Courses extends Front_Controller
 		} else {
 			$data["userEnrollStatus"] = array("UserLoggedIn"=>"0","userEnrollStatus"=>"0","course_id"=>$course_id,"user_id"=>"0");
 		}
-
+		$data['userTimeZone'] = $userTimeZone;
+		$data['priceInfo'] = $this->priceInfo;
 		$this->load->view($this->_java_container,$data);
 	}
 	
@@ -84,6 +102,8 @@ class Courses extends Front_Controller
 	*/
 	public function dotnet()
 	{
+		$userTimeZone = $this->ipInfo["timezone"];
+		
 		$course_id = 2;
 		
 		$user_id = $this->session->userdata("user_id");
@@ -96,6 +116,8 @@ class Courses extends Front_Controller
 		
 		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
+		$data['userTimeZone'] = $userTimeZone;
+		$data['priceInfo'] = $this->priceInfo;
 		$this->load->view($this->_dotnet_container,$data);
 	}
 	
@@ -128,6 +150,8 @@ class Courses extends Front_Controller
 	*/
 	public function ba()
 	{
+		$userTimeZone = $this->ipInfo["timezone"];
+		
 		$course_id = 7;
 		
 		$user_id = $this->session->userdata("user_id");
@@ -140,6 +164,8 @@ class Courses extends Front_Controller
 		
 		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
+		$data['userTimeZone'] = $userTimeZone;
+		$data['priceInfo'] = $this->priceInfo;
 		$this->load->view($this->_ba_container,$data);
 	}
 	
@@ -150,6 +176,8 @@ class Courses extends Front_Controller
 	*/
 	public function qa()
 	{
+		$userTimeZone = $this->ipInfo["timezone"];
+		
 		$course_id = 5;
 		
 		$user_id = $this->session->userdata("user_id");
@@ -162,6 +190,8 @@ class Courses extends Front_Controller
 		
 		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
+		$data['userTimeZone'] = $userTimeZone;
+		$data['priceInfo'] = $this->priceInfo;
 		$this->load->view($this->_qa_container,$data);
 	}
 	
@@ -205,6 +235,8 @@ class Courses extends Front_Controller
 	*/
 	public function salesforce()
 	{
+		$userTimeZone = $this->ipInfo["timezone"];
+		
 		$course_id = 3;
 		
 		$user_id = $this->session->userdata("user_id");
@@ -217,6 +249,8 @@ class Courses extends Front_Controller
 		
 		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
+		$data['userTimeZone'] = $userTimeZone;
+		$data['priceInfo'] = $this->priceInfo;
 		$this->load->view($this->_salesforce_container,$data);
 	}
 	
@@ -271,6 +305,8 @@ class Courses extends Front_Controller
 	*/
 	public function pmp()
 	{
+		$userTimeZone = $this->ipInfo["timezone"];
+		
 		$course_id = 6;
 		
 		$user_id = $this->session->userdata("user_id");
@@ -283,6 +319,8 @@ class Courses extends Front_Controller
 		
 		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
+		$data['userTimeZone'] = $userTimeZone;
+		$data['priceInfo'] = $this->priceInfo;
 		$this->load->view($this->_pmp_container,$data);
 	}
 	
@@ -293,6 +331,8 @@ class Courses extends Front_Controller
 	*/
 	public function hadoop()
 	{
+		$userTimeZone = $this->ipInfo["timezone"];
+		
 		$course_id = 4;
 		
 		$user_id = $this->session->userdata("user_id");
@@ -305,6 +345,8 @@ class Courses extends Front_Controller
 		
 		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
+		$data['userTimeZone'] = $userTimeZone;
+		$data['priceInfo'] = $this->priceInfo;
 		$this->load->view($this->_hadoop_container,$data);
 	}
 	
@@ -359,6 +401,8 @@ class Courses extends Front_Controller
 	*/
 	public function aws()
 	{
+		$userTimeZone = $this->ipInfo["timezone"];
+		
 		$course_id = 17;
 		
 		$user_id = $this->session->userdata("user_id");
@@ -371,6 +415,8 @@ class Courses extends Front_Controller
 		
 		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
+		$data['userTimeZone'] = $userTimeZone;
+		$data['priceInfo'] = $this->priceInfo;
 		$this->load->view($this->_aws_container,$data);
 	}
 	
@@ -434,6 +480,8 @@ class Courses extends Front_Controller
 	*/
 	public function android()
 	{
+		$userTimeZone = $this->ipInfo["timezone"];
+		
 		$course_id = 9;
 		
 		$user_id = $this->session->userdata("user_id");
@@ -446,6 +494,8 @@ class Courses extends Front_Controller
 		
 		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
+		$data['userTimeZone'] = $userTimeZone;
+		$data['priceInfo'] = $this->priceInfo;
 		$this->load->view($this->_android_container,$data);
 	}
 	
@@ -456,6 +506,8 @@ class Courses extends Front_Controller
 	*/
 	public function ios()
 	{
+		$userTimeZone = $this->ipInfo["timezone"];
+		
 		$course_id = 8;
 		
 		$user_id = $this->session->userdata("user_id");
@@ -468,6 +520,8 @@ class Courses extends Front_Controller
 		
 		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
+		$data['userTimeZone'] = $userTimeZone;
+		$data['priceInfo'] = $this->priceInfo;
 		$this->load->view($this->_ios_container,$data);
 	}
 	
@@ -478,6 +532,8 @@ class Courses extends Front_Controller
 	*/
 	public function digital_marketing()
 	{
+		$userTimeZone = $this->ipInfo["timezone"];
+		
 		$course_id = 13;
 		
 		$user_id = $this->session->userdata("user_id");
@@ -490,6 +546,8 @@ class Courses extends Front_Controller
 		
 		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
+		$data['userTimeZone'] = $userTimeZone;
+		$data['priceInfo'] = $this->priceInfo;
 		$this->load->view($this->_digital_marketing,$data);
 	}
 
@@ -500,6 +558,8 @@ class Courses extends Front_Controller
 	*/
 	public function oracle_dba()
 	{
+		$userTimeZone = $this->ipInfo["timezone"];
+		
 		$course_id = 11;
 		
 		$user_id = $this->session->userdata("user_id");
@@ -512,6 +572,8 @@ class Courses extends Front_Controller
 		
 		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
+		$data['userTimeZone'] = $userTimeZone;
+		$data['priceInfo'] = $this->priceInfo;
 		$this->load->view($this->_oracle_dba,$data);
 	}
 
@@ -522,6 +584,8 @@ class Courses extends Front_Controller
 	*/
 	public function sql()
 	{
+		$userTimeZone = $this->ipInfo["timezone"];
+		
 		$course_id = 10;
 		
 		$user_id = $this->session->userdata("user_id");
@@ -534,6 +598,8 @@ class Courses extends Front_Controller
 		
 		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
+		$data['userTimeZone'] = $userTimeZone;
+		$data['priceInfo'] = $this->priceInfo;
 		$this->load->view($this->_sql,$data);
 	}
 
@@ -544,6 +610,8 @@ class Courses extends Front_Controller
 	*/
 	public function data_science()
 	{
+		$userTimeZone = $this->ipInfo["timezone"];
+		
 		$course_id = 12;
 		
 		$user_id = $this->session->userdata("user_id");
@@ -556,6 +624,8 @@ class Courses extends Front_Controller
 		
 		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
+		$data['userTimeZone'] = $userTimeZone;
+		$data['priceInfo'] = $this->priceInfo;
 		$this->load->view($this->_data_science,$data);
 	}
 
@@ -566,6 +636,8 @@ class Courses extends Front_Controller
 	*/
 	public function vmware()
 	{
+		$userTimeZone = $this->ipInfo["timezone"];
+		
 		$course_id = 14;
 		
 		$user_id = $this->session->userdata("user_id");
@@ -578,6 +650,8 @@ class Courses extends Front_Controller
 		
 		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
+		$data['userTimeZone'] = $userTimeZone;
+		$data['priceInfo'] = $this->priceInfo;
 		$this->load->view($this->_vmware,$data);
 	}
 
@@ -588,6 +662,8 @@ class Courses extends Front_Controller
 	*/
 	public function devops()
 	{
+		$userTimeZone = $this->ipInfo["timezone"];
+		
 		$course_id = 15;
 		
 		$user_id = $this->session->userdata("user_id");
@@ -600,6 +676,8 @@ class Courses extends Front_Controller
 		
 		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
+		$data['userTimeZone'] = $userTimeZone;
+		$data['priceInfo'] = $this->priceInfo;
 		$this->load->view($this->_devops,$data);
 	}
 
