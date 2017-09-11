@@ -387,12 +387,34 @@ src="https://www.facebook.com/tr?id=1863665380325677&ev=PageView&noscript=1"
 																	$time_zone = $batch->time_zone;
 																	$amount = $batch->amount;
 																	$currency = $batch->currency;
+																	
+																	$batchStartTime = $start_date." ".$start_time;
+																	$batchEndTime = $start_date." ".$end_time;
+																	
+																	$convertedStartTime = DateTime::createFromFormat ('Y-m-d G:i:s', $batchStartTime, new DateTimeZone('EST') )->setTimeZone(new DateTimeZone($userTimeZone))->format('Y-m-d g:i A');
+																	
+																	$explodeConvertedStartTime = (explode(" ",$convertedStartTime));
+																	
+																	$convertedEndTime = DateTime::createFromFormat
+																	('Y-m-d G:i:s',
+																		$batchEndTime,
+																		new DateTimeZone('EST')
+																	)->setTimeZone(new DateTimeZone($userTimeZone))->format('Y-m-d g:i A');
+																	$explodeConvertedEndTime = (explode(" ",$convertedEndTime));
 																?>
                             <p class="time-change-wrapper" data-timestamp="1489800600" data-format="dd">
-                              <?php	echo date("d", strtotime($start_date));	?>
+                              <?php	
+							  
+								/*echo date("d", strtotime($start_date));	*/
+								echo date("d", strtotime($explodeConvertedStartTime[0]));	
+							  
+							  ?>
                             </p>
                             <span class="time-change-wrapper" data-timestamp="1489800600" data-format="MMM">
-                            <?php	echo date("M", strtotime($start_date));	?>
+                            <?php	
+								/*echo date("M", strtotime($start_date));	*/
+								echo date("M", strtotime($explodeConvertedStartTime[0]));
+							?>
                             </span> </article></td>
                         <td class="durtd"><strong>
                           <?php
@@ -401,15 +423,24 @@ src="https://www.facebook.com/tr?id=1863665380325677&ev=PageView&noscript=1"
                           </strong> <br>
                           <?php	echo $duration." ".$duration_in;	?></td>
                         <td class="timetd"><strong>
-                          <?php	echo date("h.i", strtotime($start_time));	?>
+                          <?php	
+							/*echo date("h.i", strtotime($start_time));*/
+							echo date("h:i", strtotime($explodeConvertedStartTime[1]));
+						?>
                           -
-                          <?php	echo date("h.i", strtotime($end_time))." ".$am_pm;	?>
-                          </strong><br>
+                          <?php	
+						 /* echo date("h.i", strtotime($end_time))." ".$am_pm;	*/
+						 echo date("h:i", strtotime($explodeConvertedEndTime[1]))." ".$explodeConvertedEndTime[2];
+						?>
+                         <!-- </strong><br>
                           (
-                          <?php	echo $time_zone;	?>
-                          )</td>
-                        <td class="pricetd"><?php	echo $currency;	?>
-                          <?php	echo $amount;	?></td>
+                          <?php	/*echo $time_zone;*/	?>
+                          )--></td>
+                        <td class="pricetd"><?php	/*echo $currency;*/	?>
+                          <?php	/*echo $amount;*/	?>
+						  <?php	echo $priceInfo["geoplugin_currencySymbol_UTF8"];	?>
+						  <?php	echo $amount*$priceInfo["geoplugin_currencyConverter"];	?>
+						  </td>
                         <td class="enrolltd"><?php 
 															if($this->session->userdata('user_id'))
 															{
@@ -981,7 +1012,11 @@ function showDivs(n) {
 			</div></div>
 		</div>
 	</section>
-
+	
+	
+	
+	
+	
 <section id="" class="padding-top-bottom mobstride" style="background:#0097D8;">
   <div class="container-fluid">
     <div class="row">
