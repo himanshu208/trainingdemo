@@ -351,6 +351,7 @@ Certified Salesforce Professional?<br>
                         <th scope="col" align="center">&nbsp;</th>
                       </tr>
                       <?php
+					 
 												if(empty($batches))
 												{
 								?>
@@ -807,6 +808,96 @@ function showDivs(n) {
     </div>
   </div>
 </section>
+
+
+	<section class="padding-top-bottom " style="background-color:#FFF">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col text-left col-xs-12 col-sm-12 col-md-2 col-lg-2"> </div>
+				<div class="col-md-12 col-sm-10 col-lg-10 col-xs-12 wow fadeInLeft" align="left">
+				<?php
+					if (!empty($ratings_arr)) {
+				?>
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 wow fadeInLeft" align="left">
+					<h5 class="inside-banner" style="color:#4D4D4D !important;" align="left">Let’s Hear Them, What They Got In There Bucket For JanBask! </h5>
+					<?php
+						foreach ($ratings_arr as $rating) {
+					?>
+						<div class="col-md-4 col-sm-12 col-lg-4 col-xs-12 commnt" align="left" style=" border: solid 1px #f1f1f1; padding:7px; border-radius:7px;">
+							<div class="col-md-3 col-sm-3 col-lg-4 col-xs-4 ">
+								<img alt="Online Salesforce Training" src="<?php echo $this->config->item("SITE_ROOT_IMAGE")."user/profile_pic/".$rating->user_image;	?>" class="" width="90" height="90" />
+							</div>
+							<div class="col-md-9 col-sm-9 col-lg-8 col-xs-8" align="left" style="">
+								<h2 style="font-size:22px; line-height:27px; color:#2980B9;"><?php	echo $rating->user_name;	?></h2>
+								<p align="left" style="font-size:14px; line-height:18px;"><?php	echo $rating->comments;	?></p>
+							</div>
+						</div> 
+					<?php
+						}
+					?>
+                </div>
+				<?php
+					}
+				?>
+                 <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 wow fadeInLeft" align="left">
+					 <hr style="margin-top:10px !important;">
+					 <?php
+						if ($userEnrollStatus["UserLoggedIn"]=="1" && $userEnrollStatus["userEnrollStatus"]=="1") {
+					?>
+							<h2 style="font-size:22px; line-height:27px; color:#2980B9;">Enter Your Comments/Feedback</h2>
+							<?php	echo form_open_multipart("",array("id"=>"clientRatingForm"));	?>
+							
+								<input type="hidden" id="course_id" name="course_id" value="<?php echo $userEnrollStatus["course_id"];?>">
+								
+								<input type="hidden" id="user_id" name="user_id" value="<?php echo $userEnrollStatus["user_id"];?>">
+								<div class="content">
+									<div class="form-group">
+										<?php	echo form_textarea(array("class"=>"form-control","placeholder"=>"ENTER Comments","id"=>"clientRatingComment","name"=>"clientRatingComment"));	?>
+										<span class="validation-error" id="clientRatingCommentError"></span>
+									</div>
+									
+									<div class="form-group">
+										<fieldset class="rating">
+											
+											<?php	echo form_radio(array("id"=>"star5","name"=>"clientRatingStar","value"=>"5","title"=>"5 Star"));	?>
+											<label class = "full" for="star5" title="Awesome - 5 stars"></label>
+											
+											<?php	echo form_radio(array("id"=>"star4","name"=>"clientRatingStar","value"=>"4","title"=>"4 Star"));	?>
+											<label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+											
+											<?php	echo form_radio(array("id"=>"star3","name"=>"clientRatingStar","value"=>"3","title"=>"3 Star"));	?>
+											<label class = "full" for="star3" title="Meh - 3 stars"></label>
+											
+											<?php	echo form_radio(array("id"=>"star2","name"=>"clientRatingStar","value"=>"2","title"=>"2 Star"));	?>
+											<label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+
+											<?php	echo form_radio(array("id"=>"star1","name"=>"clientRatingStar","value"=>"1","title"=>"1 Star" ) );	?>
+											<label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+										</fieldset>
+										<span class="validation-error" id="clientRatingStarError"></span>
+									</div>
+									
+									<div class="form-group" align="center" style="width:150px;">
+										<span class="validation-error" id="clientRatingSuccessMessage"></span>
+										<?php	echo form_submit(array("class"=>"btn btn-store","value"=>"Submit"));	?>
+									</div>
+													
+								</div>
+							<?php	echo form_close();	?>
+					<?php
+						}
+					?>
+				</div>
+			</div></div>
+		</div>
+	</section>
+
+
+
+
+
+
+
 <section id="" class="padding-top-bottom" style="background:#0097D8;">
   <div class="container-fluid">
     <div class="row">
