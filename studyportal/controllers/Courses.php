@@ -3,10 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Courses extends Front_Controller
 {
+	private $ipInfo = null;
+	
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->helper('jb');
+		$this->ipInfo = file_get_contents('http://ip-api.com/json/' . $_SERVER['REMOTE_ADDR']);
+		$this->ipInfo = json_decode($this->ipInfo,true);	
 	}
 	/**
 	 * Index Page for this controller.
@@ -34,6 +38,8 @@ class Courses extends Front_Controller
 	*/
 	public function java()
 	{
+		echo $this->ipInfo["timezone"];
+		
 		$course_id = 1;
 		$data['ratings_arr'] = $this->CM->checkUserRatings($course_id);
 		$data['batches'] = $this->CM->fetchBatches($course_id);
