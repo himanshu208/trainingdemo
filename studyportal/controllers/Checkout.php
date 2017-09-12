@@ -3,10 +3,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Checkout extends Front_Controller
 {
+	private $priceInfo = null;
+	
 	public function __construct()
 	{
 		parent::__construct();
 		// $this->checkUserLoginSession();
+		if (!empty($_SERVER['HTTP_CLIENT_IP']))   //check ip from share internet
+		{
+			$visitorIp = $_SERVER['HTTP_CLIENT_IP'];
+		}
+		elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))   //to check ip is pass from proxy
+		{
+			$visitorIp = $_SERVER['HTTP_X_FORWARDED_FOR'];
+		}
+		else
+		{
+			$visitorIp = $_SERVER['REMOTE_ADDR'];
+		}	
+		
+		$this->priceInfo = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$visitorIp));
 	}
 	
 	/**
@@ -22,6 +38,7 @@ class Checkout extends Front_Controller
 		$this->checkUserLoginSession();
 		$user_id = $this->session->userdata("user_id");
 		$data['cart_items'] = $this->PM->fetchCartDetails($user_id);
+		$data['priceInfo'] = $this->priceInfo;
 		$this->load->view($this->_checkout,$data);
 	}
 	
