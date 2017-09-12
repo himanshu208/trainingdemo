@@ -59,6 +59,8 @@ src="https://www.facebook.com/tr?id=1863665380325677&ev=PageView&noscript=1"
 </noscript>
 <!-- DO NOT MODIFY -->
 <!-- End Facebook Pixel Code -->
+
+<link rel="stylesheet" href="<?php	echo site_url('assets/css/rating.css');	?>">
 </head>
 
 <body id="home">
@@ -914,6 +916,7 @@ function showDivs(n) {
 </section>
 <?php	$this->load->view($this->config->item("tree_template_include")."footer");	?>
 <script type="text/javascript" src="<?php	echo site_url('assets/js/common_functions.js');	?>"></script> 
+<script type="text/javascript" src="<?php	echo site_url('assets/js/cutom_validations.js');	?>"></script>
 <script type="text/javascript" src="<?php	echo site_url('assets/js/home_js.js');	?>"></script>
 </body>
 </html>
