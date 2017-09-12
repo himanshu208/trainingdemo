@@ -157,7 +157,11 @@
 													
 												<tr style="font-weight:bold !important;">
 													<td colspan="" style="text-align:right !important;"><strong> Total</strong></td>
-													<td align="right" style="text-align:right !important;"><strong><?php	echo $amoun_billed;	?></strong></td>
+													<td align="right" style="text-align:right !important;">
+														<strong><?php	echo $amoun_billed;	?></strong>
+														<br />
+														<strong>(<?php	echo $priceInfo["geoplugin_currencySymbol_UTF8"];	?> <?php	echo round($amoun_billed*$priceInfo["geoplugin_currencyConverter"]);	?>)</strong>
+													</td>
 												</tr>
 												<?php
 														}
