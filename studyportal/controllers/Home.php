@@ -278,7 +278,11 @@ public function submit_popup_form1() {///print_r($_POST); die();
 			$userDetails = $this->HM->ratingUserDetails($user_id);
 			
 			$create_date = date('Y-m-d');
-			$rating_data = array('course_id'=>$course_id,'user_id'=>$user_id,'stars'=>$stars,'comments'=>$comments,'status'=>"0","is_admin_added"=>"0","user_name"=>$userDetails[0]->name,"user_email"=>$userDetails[0]->email,"user_image"=>$userDetails[0]->image,"create_date"=>$create_date);
+			$userImage = $userDetails[0]->image;
+			if ($userImage=="") {
+				$userImage = "defaultuser.jpg";
+			}
+			$rating_data = array('course_id'=>$course_id,'user_id'=>$user_id,'stars'=>$stars,'comments'=>$comments,'status'=>"0","is_admin_added"=>"0","user_name"=>$userDetails[0]->name,"user_email"=>$userDetails[0]->email,"user_image"=>$userImage,"create_date"=>$create_date);
 			
 			$status = $this->AM->inesertNewRating($rating_data);
 			if ($status=="1") {
