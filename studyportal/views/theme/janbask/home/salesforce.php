@@ -817,30 +817,249 @@ function showDivs(n) {
 			<div class="row">
 				<div class="col text-left col-xs-12 col-sm-12 col-md-2 col-lg-2"> </div>
 				<div class="col-md-12 col-sm-10 col-lg-10 col-xs-12 wow fadeInLeft" align="left">
-				<?php
+                <style>
+.user_header{
+    color:#104D83 !important;
+    font-size: 19px;
+    font-weight: 900;
+    margin: 0;
+	margin-bottom:0px;
+}
+.user_details{
+    color: #333;
+    font-size: 13px;
+    padding-top: 10px;
+    line-height: 20px;
+    margin-top: 16px;
+    padding-bottom: 7px;
+    margin-bottom: 0px;
+}
+i.fa.fa-star{
+     font-size:11px;
+}
+i.fa.fa-angle-right {
+     padding-left: 5px;
+    font-size: 15px;
+    position: absolute;
+    top: 0px;
+}
+.read_more{
+     color: #115297;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    width: 100%;
+	position:relative;
+	text-decoration:none !important;
+}
+.view_more{
+        width: 120px;
+    height: 36px;
+    border: 2px solid #104D83;
+    color: #104D83;
+    background-color: white;
+    font-size: 15px;
+}
+.mnbox1{
+    padding-bottom:20px;
+	border-left:solid 1px #0097D8 !important;
+	border-bottom:solid 1px #0097D8 !important;
+	border-right:solid 1px #f1f1f1 !important;
+	border-top:solid 1px #f1f1f1 !important;
+}
+.more_content{
+      display:none;
+}
+.boxen_part1{
+      display:none;
+}
+.img-circle{
+    margin:auto;
+}
+.commentbox textarea{ max-height:100px !important;}
+@media screen and (min-width:768px){
+     .user_outer_track{
+	      margin-bottom:80px !important;
+	 }  
+}
+</style>
+			<?php
 					if (!empty($ratings_arr)) {
 				?>
-                <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 wow fadeInLeft" align="left">
-					<h5 class="inside-banner" style="color:#4D4D4D !important;" align="left">Let’s Hear Them, What They Got In There Bucket For JanBask! </h5>
-					<?php
-						foreach ($ratings_arr as $rating) {
-					?>
-						<div class="col-md-4 col-sm-12 col-lg-4 col-xs-12 commnt" align="left" style=" border: solid 1px #f1f1f1; padding:7px; border-radius:7px;">
-							<div class="col-md-3 col-sm-3 col-lg-4 col-xs-4 ">
-								<img alt="Online Salesforce Training" src="<?php echo $this->config->item("SITE_ROOT_IMAGE")."user/profile_pic/".$rating->user_image;	?>" class="" width="90" height="90" />
-							</div>
-							<div class="col-md-9 col-sm-9 col-lg-8 col-xs-8" align="left" style="">
-								<h2 style="font-size:22px; line-height:27px; color:#2980B9;"><?php	echo $rating->user_name;	?></h2>
-								<p align="left" style="font-size:14px; line-height:18px;"><?php	echo $rating->comments;	?></p>
-							</div>
-						</div> 
-					<?php
-						}
-					?>
-                </div>
+                <h5 class="inside-banner" style="color:#4D4D4D !important; margin-bottom:60px;" align="left">Let’s Hear Them, What They Got In There Bucket For JanBask! </h5>
+               <section id="main_page" style="width:100%;">
+		    <div class="work_main_part" style="">
+			
 				<?php
-					}
+					$ratingArrCount = count($ratings_arr);
+					$ratingCounter = 0;
+					for ($k=1;$k<=$ratingArrCount;$k+=3) {
+						if($k<13) {
 				?>
+							<div class="row boxen_part" style="margin-left:0px;margin-right:0px;margin-bottom:0px;">
+								
+							<?php
+								for ($j=0;$j<=2;$j++) {
+									if ($ratingCounter<$ratingArrCount) {
+							?>
+								<div class="col-xs-12 col-sm-12 col-md-4 user_outer_track">
+									<div class="mnbox1" style="border:1px solid #dddddd;position:relative;">
+										<div class="row" style="margin-left:0px;margin-right:0px;">
+											<div class="col-xs-4 col-sm-4 col-md-4" style="position:relative;top:-35px;">
+												<span class="user-review-img">
+												<img src="<?php echo $this->config->item("SITE_ROOT_IMAGE")."user/profile_pic/".$ratings_arr[$ratingCounter]->user_image;	?>" class="img-circle img-responsive img90" width="100" height="auto" alt="user">      </span>
+												<div class="star-rating-review" style="padding-top:15px; text-align:center;">
+													<?php
+														for($i=0;$i<$ratings_arr[$ratingCounter]->stars;$i++) {
+													?>
+															<i class="fa fa-star" aria-hidden="true"></i>
+													<?php
+														}
+													?>
+												</div>
+											</div>  <!--inner row box column-->
+									
+											<div class="col-xs-8 col-sm-8 col-md-8" style="padding:17px 5px 0;">
+												<h2 class="user_header"><?php	echo $ratings_arr[$ratingCounter]->user_name;	?></h2>
+													<p class="user_details">
+														<?php	
+														$ratingCommentsLength = strlen($ratings_arr[$ratingCounter]->comments);
+														if ($ratingCommentsLength<=117) {
+															echo $ratings_arr[$ratingCounter]->comments;
+														} else {
+															$str1 = explode("\n", wordwrap($ratings_arr[$ratingCounter]->comments, 117));
+															echo $str1[0];
+														?>
+															<span class="more_content">
+															<?php
+															echo $str1[1];
+															?>
+															</span>
+														<?php
+														}
+														?>
+													</p>
+													
+													<a href="javascript:;" class="read_more">Read more<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+											</div>
+										</div>   <!--row-->
+									</div>	<!--mnbox1--> 
+								</div>  <!--outer row main box column-->
+							<?php
+									$ratingCounter++;
+								}
+								}
+							?>
+								
+							</div>
+				<?php
+						} else {
+				?>
+							<div class="row boxen_part1 boxen_part" style="margin-left:0px;margin-right:0px;margin-top:0px;">
+								<?php
+								for ($j=0;$j<=2;$j++) {
+									if ($ratingCounter<$ratingArrCount) {
+							?>
+								<div class="col-xs-12 col-sm-12 col-md-4 user_outer_track">
+									<div class="mnbox1" style="border:1px solid #dddddd;position:relative;">
+										<div class="row" style="margin-left:0px;margin-right:0px;">
+											<div class="col-xs-4 col-sm-4 col-md-4" style="position:relative;top:-35px;">
+												<span class="user-review-img">
+												<img src="<?php echo $this->config->item("SITE_ROOT_IMAGE")."user/profile_pic/".$ratings_arr[$ratingCounter]->user_image;	?>" class="img-circle img-responsive img90" width="100" height="auto" alt="user">      </span>
+												<div class="star-rating-review" style="padding-top:15px; text-align:center;">
+													<?php
+														for($i=0;$i<$ratings_arr[$ratingCounter]->stars;$i++) {
+													?>
+															<i class="fa fa-star" aria-hidden="true"></i>
+													<?php
+														}
+													?>
+												</div>
+											</div>  <!--inner row box column-->
+									
+											<div class="col-xs-8 col-sm-8 col-md-8" style="padding:17px 5px 0;">
+												<h2 class="user_header"><?php	echo $ratings_arr[$ratingCounter]->user_name;	?></h2>
+													<p class="user_details">
+														<?php	
+														$ratingCommentsLength = strlen($ratings_arr[$ratingCounter]->comments);
+														if ($ratingCommentsLength<=117) {
+															echo $ratings_arr[$ratingCounter]->comments;
+														} else {
+															$str1 = explode("\n", wordwrap($ratings_arr[$ratingCounter]->comments, 117));
+															echo $str1[0];
+														?>
+															<span class="more_content">
+															<?php
+															echo $str1[1];
+															?>
+															</span>
+														<?php
+														}
+														?>
+													</p>
+													
+													<a href="javascript:;" class="read_more">Read more<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+											</div>
+										</div>   <!--row-->
+									</div>	<!--mnbox1--> 
+								</div>  <!--outer row main box column-->
+							<?php
+									$ratingCounter++;
+								}
+								}
+							?>
+							</div>
+				<?php
+						}
+				?>
+							
+				<?php
+						
+					}
+				
+				?>
+				
+				
+			</div>  <!--work_main_part-->
+			<div class="now_view_more" style="width:90%;margin:10px auto;">
+			    <div class="row">
+				    <div class="co-xs-12 col-sm-12 col-md-12" style="text-align:center;">
+					    <button type="button" class="view_more">View More</button>
+					</div>
+				</div>
+			</div>
+		 </section>   <!--#main_page-->
+					<?php	}	?>
+		 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		 <script>
+		           $(document).ready(function(){
+				            var box = $('.boxen_part');
+							var current=3;
+				            $('.view_more').on('click',function(){
+							  if(current<=box.length-1){
+							  current ++;
+							  $(box[current]).css('display','block');
+							  }
+					 });
+					  $('.read_more').on('click',function(e){
+					  e.preventDefault();
+					      if($(this).hasClass('read_less')){
+					     $(this).prev('.user_details').children('.more_content').css('display','none');
+						 $(this).html('Read More<i class="fa fa-angle-right" aria-hidden="true"></i>');
+						 $(this).removeClass('read_less');
+                             }
+						 else{
+						      $(this).prev('.user_details').children('.more_content').css('display','block');
+						      $(this).html('Read Less<i class="fa fa-angle-right" aria-hidden="true"></i>');
+						      $(this).addClass('read_less');
+						   }
+						   return false;
+					  });
+					  
+					 
+				   });
+		 </script>
+		 
                  <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 wow fadeInLeft" align="left">
 					 <hr style="margin-top:10px !important;">
 					 <?php
@@ -853,7 +1072,7 @@ function showDivs(n) {
 								
 								<input type="hidden" id="user_id" name="user_id" value="<?php echo $userEnrollStatus["user_id"];?>">
 								<div class="content">
-									<div class="form-group">
+									<div class="form-group commentbox">
 										<?php	echo form_textarea(array("class"=>"form-control","placeholder"=>"ENTER Comments","id"=>"clientRatingComment","name"=>"clientRatingComment"));	?>
 										<span class="validation-error" id="clientRatingCommentError"></span>
 									</div>
